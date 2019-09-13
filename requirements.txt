@@ -1,0 +1,6 @@
+autopep8==1.4.4
+Django==2.2.4
+pep8==1.7.1
+pycodestyle==2.5.0
+pytz==2018.5
+sqlparse==0.2.4
