@@ -1,8 +1,0 @@
-{
-  "name": "example-ng-hide-complex",
-  "files": [
-    "index-production.html",
-    "animations.css",
-    "protractor.js"
-  ]
-}

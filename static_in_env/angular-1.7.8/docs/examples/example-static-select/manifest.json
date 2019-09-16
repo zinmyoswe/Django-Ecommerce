@@ -1,7 +1,0 @@
-{
-  "name": "example-static-select",
-  "files": [
-    "index-production.html",
-    "app.js"
-  ]
-}

@@ -1,9 +1,0 @@
-{
-  "name": "example-ngOnCustom",
-  "files": [
-    "index-production.html",
-    "app.js",
-    "main.html",
-    "child.html"
-  ]
-}

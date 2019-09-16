@@ -1,8 +1,0 @@
-<div>
-  <input type="search" ng-model="$ctrl.searchTerm" />
-  <ul>
-    <li ng-repeat="item in $ctrl.items | filter:$ctrl.searchTerm">
-      <button ng-click="$ctrl.selectItem(item)">{{ item.name }}</button>
-    </li>
-  </ul>
-</div>

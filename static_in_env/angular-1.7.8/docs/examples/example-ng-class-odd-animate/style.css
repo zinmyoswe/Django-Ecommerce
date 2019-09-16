@@ -1,7 +1,0 @@
-.odd {
-  background: rgba(255, 255, 0, 0.25);
-}
-
-.odd-add, .odd-remove {
-  transition: 1.5s;
-}

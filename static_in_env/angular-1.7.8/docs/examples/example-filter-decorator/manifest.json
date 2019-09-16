@@ -1,8 +1,0 @@
-{
-  "name": "example-filter-decorator",
-  "files": [
-    "index-production.html",
-    "script.js",
-    "protractor.js"
-  ]
-}

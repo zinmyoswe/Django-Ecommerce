@@ -1,7 +1,0 @@
-{
-  "name": "example-expression-simple",
-  "files": [
-    "index-production.html",
-    "protractor.js"
-  ]
-}

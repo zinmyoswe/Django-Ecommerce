@@ -1,7 +1,0 @@
-.even {
-  background: rgba(255, 255, 0, 0.25);
-}
-
-.even-add, .even-remove {
-  transition: 1.5s;
-}

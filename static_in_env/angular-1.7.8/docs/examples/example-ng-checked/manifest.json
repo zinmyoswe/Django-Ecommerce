@@ -1,7 +1,0 @@
-{
-  "name": "example-ng-checked",
-  "files": [
-    "index-production.html",
-    "protractor.js"
-  ]
-}

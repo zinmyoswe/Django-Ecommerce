@@ -1,7 +1,0 @@
-{
-  "name": "example-ng-init",
-  "files": [
-    "index-production.html",
-    "protractor.js"
-  ]
-}

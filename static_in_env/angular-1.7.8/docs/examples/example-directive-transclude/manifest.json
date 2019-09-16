@@ -1,8 +1,0 @@
-{
-  "name": "example-directive-transclude",
-  "files": [
-    "index-production.html",
-    "script.js",
-    "my-dialog.html"
-  ]
-}

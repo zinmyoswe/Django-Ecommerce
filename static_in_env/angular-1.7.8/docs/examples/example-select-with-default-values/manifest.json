@@ -1,7 +1,0 @@
-{
-  "name": "example-select-with-default-values",
-  "files": [
-    "index-production.html",
-    "app.js"
-  ]
-}

@@ -1,8 +1,0 @@
-{
-  "name": "example-ng-model-process",
-  "files": [
-    "index-production.html",
-    "app.js",
-    "autocomplete.html"
-  ]
-}

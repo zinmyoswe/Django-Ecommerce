@@ -1,7 +1,0 @@
-{
-  "name": "example-script-tag",
-  "files": [
-    "index-production.html",
-    "protractor.js"
-  ]
-}
