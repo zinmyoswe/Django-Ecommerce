@@ -1,0 +1,33 @@
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li[ng-repeat] {
+  background: lightgreen;
+  padding: 8px;
+  margin: 8px;
+}
+
+[ng-if] {
+  background: lightgrey;
+  padding: 8px;
+}
+
+my-root {
+  background: lightgoldenrodyellow;
+  padding: 8px;
+  display: block;
+}
+
+my-wrapper {
+  background: lightsalmon;
+  padding: 8px;
+  display: block;
+}
+
+my-toggle {
+  background: lightblue;
+  padding: 8px;
+  display: block;
+}

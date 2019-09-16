@@ -1,0 +1,197 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ng/compile.js?message=docs(ngProp)%3A%20describe%20your%20change...#L1047' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ng/compile.js#L1047' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngProp</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>The <code>ngProp</code> directive binds an expression to a DOM element property.
+<code>ngProp</code> allows writing to arbitrary properties by including
+the property name in the attribute, e.g. <code>ng-prop-value=&quot;&#39;my value&#39;&quot;</code> binds &#39;my value&#39; to
+the <code>value</code> property.</p>
+<p>Usually, it&#39;s not necessary to write to properties in AngularJS, as the built-in directives
+handle the most common use cases (instead of the above example, you would use <a href="api/ng/directive/ngValue"><code>ngValue</code></a>).</p>
+<p>However, <a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_custom_elements">custom elements</a>
+often use custom properties to hold data, and <code>ngProp</code> can be used to provide input to these
+custom elements.</p>
+<h2 id="binding-to-camelcase-properties">Binding to camelCase properties</h2>
+<p>Since HTML attributes are case-insensitive, camelCase properties like <code>innerHTML</code> must be escaped.
+AngularJS uses the underscore (_) in front of a character to indicate that it is uppercase, so
+<code>innerHTML</code>  must be written as <code>ng-prop-inner_h_t_m_l=&quot;expression&quot;</code> (Note that this is just an
+example, and for binding HTML <a href="api/ng/directive/ngBindHtml"><code>ngBindHtml</code></a> should be used.</p>
+<h2 id="security">Security</h2>
+<p>Binding expressions to arbitrary properties poses a security risk, as  properties like <code>innerHTML</code>
+can insert potentially dangerous HTML into the application, e.g. script tags that execute
+malicious code.
+For this reason, <code>ngProp</code> applies Strict Contextual Escaping with the <a href="api/ng/service/$sce">$sce service</a>.
+This means vulnerable properties require their content to be &quot;trusted&quot;, based on the
+context of the property. For example, the <code>innerHTML</code> is in the <code>HTML</code> context, and the
+<code>iframe.src</code> property is in the <code>RESOURCE_URL</code> context, which requires that values written to
+this property are trusted as a <code>RESOURCE_URL</code>.</p>
+<p>This can be set explicitly by calling $sce.trustAs(type, value) on the value that is
+trusted before passing it to the <code>ng-prop-*</code> directive. There are exist shorthand methods for
+each context type in the form of <a href="api/ng/service/$sce#trustAsResourceUrl">$sce.trustAsResourceUrl()</a> et al.</p>
+<p>In some cases you can also rely upon automatic sanitization of untrusted values - see below.</p>
+<p>Based on the context, other options may exist to mark a value as trusted / configure the behavior
+of <a href="api/ng/service/$sce"><code>$sce</code></a>. For example, to restrict the <code>RESOURCE_URL</code> context to specific origins, use
+the <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhitelist">resourceUrlWhitelist()</a>
+and <a href="api/ng/provider/$sceDelegateProvider#resourceUrlBlacklist">resourceUrlBlacklist()</a>.</p>
+<p><a href="api/ng/service/$sce#what-trusted-context-types-are-supported-">Find out more about the different context types</a>.</p>
+<h3 id="html-sanitization">HTML Sanitization</h3>
+<p>By default, <code>$sce</code> will throw an error if it detects untrusted HTML content, and will not bind the
+content.
+However, if you include the <a href="api/ngSanitize">ngSanitize module</a>, it will try to sanitize the
+potentially dangerous HTML, e.g. strip non-whitelisted tags and attributes when binding to
+<code>innerHTML</code>.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2 id="ngProp-info">Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <pre><code class="lang-html">&lt;ANY ng-prop-propname=&quot;expression&quot;&gt;
+&lt;/ANY&gt;
+</code></pre>
+<p>or with uppercase letters in property (e.g. &quot;propName&quot;):</p>
+<pre><code class="lang-html">&lt;ANY ng-prop-prop_name=&quot;expression&quot;&gt;
+&lt;/ANY&gt;
+</code></pre>
+
+  
+  </div>
+  
+  
+
+  
+  <h2 id="examples">Examples</h2><h3 id="binding-to-different-contexts">Binding to different contexts</h3>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngProp"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngProp"
+      name="ngProp"
+      module="exampleNgProp">
+
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;exampleNgProp&#39;, [])&#10;.component(&#39;main&#39;, {&#10;  templateUrl: &#39;main.html&#39;,&#10;  controller: function($sce) {&#10;    this.safeContent = &#39;&lt;strong&gt;Safe content&lt;/strong&gt;&#39;;&#10;    this.unsafeContent = &#39;&lt;button onclick=&quot;alert(\&#39;Hello XSS!\&#39;)&quot;&gt;Click for XSS&lt;/button&gt;&#39;;&#10;    this.trustedUnsafeContent = $sce.trustAsHtml(this.unsafeContent);&#10;  }&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="main.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div&gt;&#10;  &lt;div class=&quot;prop-unit&quot;&gt;&#10;    Binding to a property without security context:&#10;    &lt;div class=&quot;prop-binding&quot; ng-prop-inner_text=&quot;$ctrl.safeContent&quot;&gt;&lt;/div&gt;&#10;    &lt;span class=&quot;prop-note&quot;&gt;innerText&lt;/span&gt; (safeContent)&#10;  &lt;/div&gt;&#10;&#10;  &lt;div class=&quot;prop-unit&quot;&gt;&#10;    &quot;Safe&quot; content that requires a security context will throw because the contents could potentially be dangerous ...&#10;    &lt;div class=&quot;prop-binding&quot; ng-prop-inner_h_t_m_l=&quot;$ctrl.safeContent&quot;&gt;&lt;/div&gt;&#10;    &lt;span class=&quot;prop-note&quot;&gt;innerHTML&lt;/span&gt; (safeContent)&#10;  &lt;/div&gt;&#10;&#10;  &lt;div class=&quot;prop-unit&quot;&gt;&#10;    ... so that actually dangerous content cannot be executed:&#10;    &lt;div class=&quot;prop-binding&quot; ng-prop-inner_h_t_m_l=&quot;$ctrl.unsafeContent&quot;&gt;&lt;/div&gt;&#10;    &lt;span class=&quot;prop-note&quot;&gt;innerHTML&lt;/span&gt; (unsafeContent)&#10;  &lt;/div&gt;&#10;&#10;  &lt;div class=&quot;prop-unit&quot;&gt;&#10;    ... but unsafe Content that has been trusted explicitly works - only do this if you are 100% sure!&#10;    &lt;div class=&quot;prop-binding&quot; ng-prop-inner_h_t_m_l=&quot;$ctrl.trustedUnsafeContent&quot;&gt;&lt;/div&gt;&#10;    &lt;span class=&quot;prop-note&quot;&gt;innerHTML&lt;/span&gt; (trustedUnsafeContent)&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;main&gt;&lt;/main&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="styles.css"
+      language="css"
+      type="css">
+      <pre><code>.prop-unit {&#10;  margin-bottom: 10px;&#10;}&#10;&#10;.prop-binding {&#10;  min-height: 30px;&#10;  border: 1px solid blue;&#10;}&#10;&#10;.prop-note {&#10;  font-family: Monospace;&#10;}</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngProp/index.html" name="example-ngProp"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="binding-to-innerhtml-with-ngsanitize">Binding to innerHTML with ngSanitize</h3>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngProp1"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngProp1"
+      name="ngProp"
+      module="exampleNgProp"
+      deps="angular-sanitize.js">
+
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;exampleNgProp&#39;, [&#39;ngSanitize&#39;])&#10;.component(&#39;main&#39;, {&#10;  templateUrl: &#39;main.html&#39;,&#10;  controller: function($sce) {&#10;    this.safeContent = &#39;&lt;strong&gt;Safe content&lt;/strong&gt;&#39;;&#10;    this.unsafeContent = &#39;&lt;button onclick=&quot;alert(\&#39;Hello XSS!\&#39;)&quot;&gt;Click for XSS&lt;/button&gt;&#39;;&#10;    this.trustedUnsafeContent = $sce.trustAsHtml(this.unsafeContent);&#10;  }&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="main.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div&gt;&#10;  &lt;div class=&quot;prop-unit&quot;&gt;&#10;    &quot;Safe&quot; content will be sanitized ...&#10;    &lt;div class=&quot;prop-binding&quot; ng-prop-inner_h_t_m_l=&quot;$ctrl.safeContent&quot;&gt;&lt;/div&gt;&#10;    &lt;span class=&quot;prop-note&quot;&gt;innerHTML&lt;/span&gt; (safeContent)&#10;  &lt;/div&gt;&#10;&#10;  &lt;div class=&quot;prop-unit&quot;&gt;&#10;    ... as will dangerous content:&#10;    &lt;div class=&quot;prop-binding&quot; ng-prop-inner_h_t_m_l=&quot;$ctrl.unsafeContent&quot;&gt;&lt;/div&gt;&#10;    &lt;span class=&quot;prop-note&quot;&gt;innerHTML&lt;/span&gt; (unsafeContent)&#10;  &lt;/div&gt;&#10;&#10;  &lt;div class=&quot;prop-unit&quot;&gt;&#10;    ... and content that has been trusted explicitly works the same as without ngSanitize:&#10;    &lt;div class=&quot;prop-binding&quot; ng-prop-inner_h_t_m_l=&quot;$ctrl.trustedUnsafeContent&quot;&gt;&lt;/div&gt;&#10;    &lt;span class=&quot;prop-note&quot;&gt;innerHTML&lt;/span&gt; (trustedUnsafeContent)&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;main&gt;&lt;/main&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="styles.css"
+      language="css"
+      type="css">
+      <pre><code>.prop-unit {&#10;  margin-bottom: 10px;&#10;}&#10;&#10;.prop-binding {&#10;  min-height: 30px;&#10;  border: 1px solid blue;&#10;}&#10;&#10;.prop-note {&#10;  font-family: Monospace;&#10;}</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngProp1/index.html" name="example-ngProp1"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

@@ -1,0 +1,25 @@
+<strong>myRoot</strong>
+<my-toggle ng-ref="$ctrl.outerToggle">Outer Toggle</my-toggle>
+<div>outerToggle.isOpen(): {{$ctrl.outerToggle.isOpen() | json}}</div>
+<div><em>wrappers assigned to root</em><br>
+<div ng-repeat="wrapper in $ctrl.wrappers">
+  wrapper.ngRepeatToggle.isOpen(): {{wrapper.ngRepeatToggle.isOpen() | json}}
+</div>
+
+<ul>
+  <li ng-repeat="(index, value) in [1,2,3]">
+    <strong>ngRepeat</strong>
+    <div>outerToggle.isOpen(): {{$ctrl.outerToggle.isOpen() | json}}</div>
+    <my-wrapper ng-ref="$ctrl.wrappers[index]">ngRepeat Toggle {{$index + 1}}</my-wrapper>
+  </li>
+</ul>
+
+<div>ngIfToggle.isOpen(): {{ngIfToggle.isOpen()}} // This is always undefined because it's
+  assigned to the child scope created by ngIf.
+</div>
+<div ng-if="true">
+      <strong>ngIf</strong>
+   <my-toggle ng-ref="ngIfToggle">ngIf Toggle</my-toggle>
+   <div>ngIfToggle.isOpen(): {{ngIfToggle.isOpen() | json}}</div>
+   <div>outerToggle.isOpen(): {{$ctrl.outerToggle.isOpen() | json}}</div>
+</div>

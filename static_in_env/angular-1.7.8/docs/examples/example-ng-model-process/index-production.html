@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ng-model-process-production</title>
+  
+
+  <script src="//code.angularjs.org/1.7.8/angular.min.js"></script>
+  <script src="app.js"></script>
+  
+
+  
+</head>
+<body ng-app="inputExample">
+  <div ng-controller="inputController" style="display: flex;">
+  <div style="margin-right: 30px;">
+    Search Fruit:
+    <basic-autocomplete items="items" on-select="selectedFruit = item"></basic-autocomplete>
+  </div>
+  <div>
+    Model:<br>
+    <pre>{{selectedFruit | json}}</pre>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "example-ngModelOptions-advanced",
+  "files": [
+    "index-production.html",
+    "app.js",
+    "template.html"
+  ]
+}

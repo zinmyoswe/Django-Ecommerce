@@ -1,0 +1,113 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ng/directive/form.js?message=docs(ngForm)%3A%20describe%20your%20change...#L374' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ng/directive/form.js#L374' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngForm</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>Helper directive that makes it possible to create control groups inside a
+<a href="api/ng/directive/form"><code>form</code></a> directive.
+These &quot;child forms&quot; can be used, for example, to determine the validity of a sub-group of
+controls.</p>
+<div class="alert alert-danger">
+<strong>Note</strong>: <code>ngForm</code> cannot be used as a replacement for <code>&lt;form&gt;</code>, because it lacks its
+<a href="https://html.spec.whatwg.org/#the-form-element">built-in HTML functionality</a>.
+Specifically, you cannot submit <code>ngForm</code> like a <code>&lt;form&gt;</code> tag. That means,
+you cannot send data to the server with <code>ngForm</code>, or integrate it with
+<a href="api/ng/directive/ngSubmit"><code>ngSubmit</code></a>.
+</div>
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2 id="ngForm-info">Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-form&#10;  [name=&quot;string&quot;]&gt;&#10;...&#10;&lt;/ng-form&gt;</code></pre>
+      </li>
+    
+
+    
+    <li>as attribute:
+        <pre><code>&lt;ANY&#10;  [ng-form=&quot;string&quot;]&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+      </li>
+    <li>as CSS class:
+        <pre><code>&lt;ANY class=&quot;[ng-form: string;]&quot;&gt; ... &lt;/ANY&gt;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3 id="ngForm-arguments">Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        ngForm
+        | name
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Name of the form. If specified, the form controller will
+                             be published into the related scope, under this name.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+</div>
+
+

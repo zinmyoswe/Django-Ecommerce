@@ -1,0 +1,436 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ng/directive/ngModelOptions.js?message=docs(ngModelOptions)%3A%20describe%20your%20change...#L92' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ng/directive/ngModelOptions.js#L92' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngModelOptions</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>This directive allows you to modify the behaviour of <a href="api/ng/directive/ngModel"><code>ngModel</code></a> directives within your
+application. You can specify an <code>ngModelOptions</code> directive on any element. All <a href="api/ng/directive/ngModel"><code>ngModel</code></a>
+directives will use the options of their nearest <code>ngModelOptions</code> ancestor.</p>
+<p>The <code>ngModelOptions</code> settings are found by evaluating the value of the attribute directive as
+an AngularJS expression. This expression should evaluate to an object, whose properties contain
+the settings. For example: <code>&lt;div ng-model-options=&quot;{ debounce: 100 }&quot;</code>.</p>
+<h2 id="inheriting-options">Inheriting Options</h2>
+<p>You can specify that an <code>ngModelOptions</code> setting should be inherited from a parent <code>ngModelOptions</code>
+directive by giving it the value of <code>&quot;$inherit&quot;</code>.
+Then it will inherit that setting from the first <code>ngModelOptions</code> directive found by traversing up the
+DOM tree. If there is no ancestor element containing an <code>ngModelOptions</code> directive then default settings
+will be used.</p>
+<p>For example given the following fragment of HTML</p>
+<pre><code class="lang-html">&lt;div ng-model-options=&quot;{ allowInvalid: true, debounce: 200 }&quot;&gt;
+  &lt;form ng-model-options=&quot;{ updateOn: &#39;blur&#39;, allowInvalid: &#39;$inherit&#39; }&quot;&gt;
+    &lt;input ng-model-options=&quot;{ updateOn: &#39;default&#39;, allowInvalid: &#39;$inherit&#39; }&quot; /&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+<p>the <code>input</code> element will have the following settings</p>
+<pre><code class="lang-js">{ allowInvalid: true, updateOn: &#39;default&#39;, debounce: 0 }
+</code></pre>
+<p>Notice that the <code>debounce</code> setting was not inherited and used the default value instead.</p>
+<p>You can specify that all undefined settings are automatically inherited from an ancestor by
+including a property with key of <code>&quot;*&quot;</code> and value of <code>&quot;$inherit&quot;</code>.</p>
+<p>For example given the following fragment of HTML</p>
+<pre><code class="lang-html">&lt;div ng-model-options=&quot;{ allowInvalid: true, debounce: 200 }&quot;&gt;
+  &lt;form ng-model-options=&quot;{ updateOn: &#39;blur&#39;, &quot;*&quot;: &#39;$inherit&#39; }&quot;&gt;
+    &lt;input ng-model-options=&quot;{ updateOn: &#39;default&#39;, &quot;*&quot;: &#39;$inherit&#39; }&quot; /&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+<p>the <code>input</code> element will have the following settings</p>
+<pre><code class="lang-js">{ allowInvalid: true, updateOn: &#39;default&#39;, debounce: 200 }
+</code></pre>
+<p>Notice that the <code>debounce</code> setting now inherits the value from the outer <code>&lt;div&gt;</code> element.</p>
+<p>If you are creating a reusable component then you should be careful when using <code>&quot;*&quot;: &quot;$inherit&quot;</code>
+since you may inadvertently inherit a setting in the future that changes the behavior of your component.</p>
+<h2 id="triggering-and-debouncing-model-updates">Triggering and debouncing model updates</h2>
+<p>The <code>updateOn</code> and <code>debounce</code> properties allow you to specify a custom list of events that will
+trigger a model update and/or a debouncing delay so that the actual update only takes place when
+a timer expires; this timer will be reset after another change takes place.</p>
+<p>Given the nature of <code>ngModelOptions</code>, the value displayed inside input fields in the view might
+be different from the value in the actual model. This means that if you update the model you
+should also invoke <a href="api/ng/type/ngModel.NgModelController#$rollbackViewValue"><code>ngModel.NgModelController</code></a> on the relevant input field in
+order to make sure it is synchronized with the model and that any debounced action is canceled.</p>
+<p>The easiest way to reference the control&#39;s <a href="api/ng/type/ngModel.NgModelController#$rollbackViewValue"><code>ngModel.NgModelController</code></a>
+method is by making sure the input is placed inside a form that has a <code>name</code> attribute. This is
+important because <code>form</code> controllers are published to the related scope under the name in their
+<code>name</code> attribute.</p>
+<p>Any pending changes will take place immediately when an enclosing form is submitted via the
+<code>submit</code> event. Note that <code>ngClick</code> events will occur before the model is updated. Use <code>ngSubmit</code>
+to have access to the updated model.</p>
+<h3 id="overriding-immediate-updates">Overriding immediate updates</h3>
+<p>The following example shows how to override immediate updates. Changes on the inputs within the
+form will update the model only when the control loses focus (blur event). If <code>escape</code> key is
+pressed while the input field is focused, the value is reset to the value in the current model.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngModelOptions-directive-blur"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngModelOptions-directive-blur"
+      name="ngModelOptions-directive-blur"
+      module="optionsExample">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;form name=&quot;userForm&quot;&gt;&#10;    &lt;label&gt;&#10;      Name:&#10;      &lt;input type=&quot;text&quot; name=&quot;userName&quot;&#10;             ng-model=&quot;user.name&quot;&#10;             ng-model-options=&quot;{ updateOn: &#39;blur&#39; }&quot;&#10;             ng-keyup=&quot;cancel($event)&quot; /&gt;&#10;    &lt;/label&gt;&lt;br /&gt;&#10;    &lt;label&gt;&#10;      Other data:&#10;      &lt;input type=&quot;text&quot; ng-model=&quot;user.data&quot; /&gt;&#10;    &lt;/label&gt;&lt;br /&gt;&#10;  &lt;/form&gt;&#10;  &lt;pre&gt;user.name = &lt;span ng-bind=&quot;user.name&quot;&gt;&lt;/span&gt;&lt;/pre&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;optionsExample&#39;, [])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.user = { name: &#39;say&#39;, data: &#39;&#39; };&#10;&#10;  $scope.cancel = function(e) {&#10;    if (e.keyCode === 27) {&#10;      $scope.userForm.userName.$rollbackViewValue();&#10;    }&#10;  };&#10;}]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>var model = element(by.binding(&#39;user.name&#39;));&#10;var input = element(by.model(&#39;user.name&#39;));&#10;var other = element(by.model(&#39;user.data&#39;));&#10;&#10;it(&#39;should allow custom events&#39;, function() {&#10;  input.sendKeys(&#39; hello&#39;);&#10;  input.click();&#10;  expect(model.getText()).toEqual(&#39;say&#39;);&#10;  other.click();&#10;  expect(model.getText()).toEqual(&#39;say hello&#39;);&#10;});&#10;&#10;it(&#39;should $rollbackViewValue when model changes&#39;, function() {&#10;  input.sendKeys(&#39; hello&#39;);&#10;  expect(input.getAttribute(&#39;value&#39;)).toEqual(&#39;say hello&#39;);&#10;  input.sendKeys(protractor.Key.ESCAPE);&#10;  expect(input.getAttribute(&#39;value&#39;)).toEqual(&#39;say&#39;);&#10;  other.click();&#10;  expect(model.getText()).toEqual(&#39;say&#39;);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngModelOptions-directive-blur/index.html" name="example-ngModelOptions-directive-blur"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="debouncing-updates">Debouncing updates</h3>
+<p>The next example shows how to debounce model changes. Model will be updated only 1 sec after last change.
+If the <code>Clear</code> button is pressed, any debounced action is canceled and the value becomes empty.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngModelOptions-directive-debounce"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngModelOptions-directive-debounce"
+      name="ngModelOptions-directive-debounce"
+      module="optionsExample">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;form name=&quot;userForm&quot;&gt;&#10;    Name:&#10;    &lt;input type=&quot;text&quot; name=&quot;userName&quot;&#10;           ng-model=&quot;user.name&quot;&#10;           ng-model-options=&quot;{ debounce: 1000 }&quot; /&gt;&#10;    &lt;button ng-click=&quot;userForm.userName.$rollbackViewValue(); user.name=&#39;&#39;&quot;&gt;Clear&lt;/button&gt;&lt;br /&gt;&#10;  &lt;/form&gt;&#10;  &lt;pre&gt;user.name = &lt;span ng-bind=&quot;user.name&quot;&gt;&lt;/span&gt;&lt;/pre&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;optionsExample&#39;, [])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.user = { name: &#39;say&#39; };&#10;}]);</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngModelOptions-directive-debounce/index.html" name="example-ngModelOptions-directive-debounce"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="default-events-extra-triggers-and-catch-all-debounce-values">Default events, extra triggers, and catch-all debounce values</h3>
+<p>This example shows the relationship between &quot;default&quot; update events and
+additional <code>updateOn</code> triggers.</p>
+<p><code>default</code> events are those that are bound to the control, and when fired, update the <code>$viewValue</code>
+via <a href="api/ng/type/ngModel.NgModelController#$setViewValue">$setViewValue</a>. Every event that is not listed
+in <code>updateOn</code> is considered a &quot;default&quot; event, since different control types have different
+default events.</p>
+<p>The control in this example updates by &quot;default&quot;, &quot;click&quot;, and &quot;blur&quot;, with different <code>debounce</code>
+values. You can see that &quot;click&quot; doesn&#39;t have an individual <code>debounce</code> value -
+therefore it uses the <code>*</code> debounce value.</p>
+<p>There is also a button that calls <a href="api/ng/type/ngModel.NgModelController#$setViewValue">$setViewValue</a>
+directly with a &quot;custom&quot; event. Since &quot;custom&quot; is not defined in the <code>updateOn</code> list,
+it is considered a &quot;default&quot; event and will update the
+control if &quot;default&quot; is defined in <code>updateOn</code>, and will receive the &quot;default&quot; debounce value.
+Note that this is just to illustrate how custom controls would possibly call <code>$setViewValue</code>.</p>
+<p>You can change the <code>updateOn</code> and <code>debounce</code> configuration to test different scenarios. This
+is done with <a href="api/ng/type/ngModel.NgModelController#$overrideModelOptions">$overrideModelOptions</a>.</p>
+<p>  
+
+<div>
+  <plnkr-opener example-path="examples/example-ngModelOptions-advanced"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngModelOptions-advanced"
+      name="ngModelOptions-advanced"
+      module="optionsExample">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;model-update-demo&gt;&lt;/model-update-demo&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;optionsExample&#39;, [])&#10;.component(&#39;modelUpdateDemo&#39;, {&#10;  templateUrl: &#39;template.html&#39;,&#10;  controller: function() {&#10;    this.name = &#39;Chinua&#39;;&#10;&#10;    this.options = {&#10;      updateOn: &#39;default blur click&#39;,&#10;      debounce: {&#10;        default: 2000,&#10;        blur: 0,&#10;        &#39;*&#39;: 1000&#10;      }&#10;    };&#10;&#10;    this.updateEvents = function() {&#10;      var eventList = this.options.updateOn.split(&#39; &#39;);&#10;      eventList.push(&#39;*&#39;);&#10;      var events = {};&#10;&#10;      for (var i = 0; i &lt; eventList.length; i++) {&#10;        events[eventList[i]] = this.options.debounce[eventList[i]];&#10;      }&#10;&#10;      this.events = events;&#10;    };&#10;&#10;    this.updateOptions = function() {&#10;      var options = angular.extend(this.options, {&#10;        updateOn: Object.keys(this.events).join(&#39; &#39;).replace(&#39;*&#39;, &#39;&#39;),&#10;        debounce: this.events&#10;      });&#10;&#10;      this.form.input.$overrideModelOptions(options);&#10;    };&#10;&#10;    // Initialize the event form&#10;    this.updateEvents();&#10;  }&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="template.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;form name=&quot;$ctrl.form&quot;&gt;&#10;  Input: &lt;input type=&quot;text&quot; name=&quot;input&quot; ng-model=&quot;$ctrl.name&quot; ng-model-options=&quot;$ctrl.options&quot; /&gt;&#10;&lt;/form&gt;&#10;Model: &lt;tt&gt;{{$ctrl.name}}&lt;/tt&gt;&#10;&lt;hr&gt;&#10;&lt;button ng-click=&quot;$ctrl.form.input.$setViewValue(&#39;some value&#39;, &#39;custom&#39;)&quot;&gt;Trigger setViewValue with &#39;some value&#39; and &#39;custom&#39; event&lt;/button&gt;&#10;&#10;&lt;hr&gt;&#10;&lt;form ng-submit=&quot;$ctrl.updateOptions()&quot;&gt;&#10;  &lt;b&gt;updateOn&lt;/b&gt;&lt;br&gt;&#10;  &lt;input type=&quot;text&quot; ng-model=&quot;$ctrl.options.updateOn&quot; ng-change=&quot;$ctrl.updateEvents()&quot; ng-model-options=&quot;{debounce: 500}&quot;&gt;&#10;&#10;  &lt;table&gt;&#10;    &lt;tr&gt;&#10;      &lt;th&gt;Option&lt;/th&gt;&#10;      &lt;th&gt;Debounce value&lt;/th&gt;&#10;    &lt;/tr&gt;&#10;    &lt;tr ng-repeat=&quot;(key, value) in $ctrl.events&quot;&gt;&#10;      &lt;td&gt;{{key}}&lt;/td&gt;&#10;      &lt;td&gt;&lt;input type=&quot;number&quot; ng-model=&quot;$ctrl.events[key]&quot; /&gt;&lt;/td&gt;&#10;    &lt;/tr&gt;&#10;  &lt;/table&gt;&#10;&#10;  &lt;br&gt;&#10;  &lt;input type=&quot;submit&quot; value=&quot;Update options&quot;&gt;&#10;&lt;/form&gt;</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngModelOptions-advanced/index.html" name="example-ngModelOptions-advanced"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h2 id="model-updates-and-validation">Model updates and validation</h2>
+<p>The default behaviour in <code>ngModel</code> is that the model value is set to <code>undefined</code> when the
+validation determines that the value is invalid. By setting the <code>allowInvalid</code> property to true,
+the model will still be updated even if the value is invalid.</p>
+<h2 id="connecting-to-the-scope">Connecting to the scope</h2>
+<p>By setting the <code>getterSetter</code> property to true you are telling ngModel that the <code>ngModel</code> expression
+on the scope refers to a &quot;getter/setter&quot; function rather than the value itself.</p>
+<p>The following example shows how to bind to getter/setters:</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngModelOptions-directive-getter-setter"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngModelOptions-directive-getter-setter"
+      name="ngModelOptions-directive-getter-setter"
+      module="getterSetterExample">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;form name=&quot;userForm&quot;&gt;&#10;    &lt;label&gt;&#10;      Name:&#10;      &lt;input type=&quot;text&quot; name=&quot;userName&quot;&#10;             ng-model=&quot;user.name&quot;&#10;             ng-model-options=&quot;{ getterSetter: true }&quot; /&gt;&#10;    &lt;/label&gt;&#10;  &lt;/form&gt;&#10;  &lt;pre&gt;user.name = &lt;span ng-bind=&quot;user.name()&quot;&gt;&lt;/span&gt;&lt;/pre&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;getterSetterExample&#39;, [])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  var _name = &#39;Brian&#39;;&#10;  $scope.user = {&#10;    name: function(newName) {&#10;      return angular.isDefined(newName) ? (_name = newName) : _name;&#10;    }&#10;  };&#10;}]);</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngModelOptions-directive-getter-setter/index.html" name="example-ngModelOptions-directive-getter-setter"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h2 id="programmatically-changing-options">Programmatically changing options</h2>
+<p>The <code>ngModelOptions</code> expression is only evaluated once when the directive is linked; it is not
+watched for changes. However, it is possible to override the options on a single
+<a href="api/ng/type/ngModel.NgModelController"><code>ngModel.NgModelController</code></a> instance with
+<a href="api/ng/type/ngModel.NgModelController#$overrideModelOptions"><code>NgModelController#$overrideModelOptions()</code></a>.
+See also the example for
+<a href="api/ng/directive/ngModelOptions#default-events-extra-triggers-and-catch-all-debounce-values">Default events, extra triggers, and catch-all debounce values</a>.</p>
+<h2 id="specifying-timezones">Specifying timezones</h2>
+<p>You can specify the timezone that date/time input directives expect by providing its name in the
+<code>timezone</code> property.</p>
+<h2 id="formatting-the-value-of-time-and-datetime-local-">Formatting the value of <code>time</code> and <code>datetime-local</code></h2>
+<p>With the options <code>timeSecondsFormat</code> and <code>timeStripZeroSeconds</code> it is possible to adjust the value
+that is displayed in the control. Note that browsers may apply their own formatting
+in the user interface.</p>
+<p>   
+
+<div>
+  <plnkr-opener example-path="examples/example-ngModelOptions-time-format"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngModelOptions-time-format"
+      name="ngModelOptions-time-format"
+      module="timeExample">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;time-example&gt;&lt;/time-example&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;timeExample&#39;, [])&#10;.component(&#39;timeExample&#39;, {&#10;  templateUrl: &#39;timeExample.html&#39;,&#10;  controller: function() {&#10;    this.time = new Date(1970, 0, 1, 14, 57, 0);&#10;&#10;    this.options = {&#10;      timeSecondsFormat: &#39;ss&#39;,&#10;      timeStripZeroSeconds: true&#10;    };&#10;&#10;    this.optionChange = function() {&#10;      this.timeForm.timeFormatted.$overrideModelOptions(this.options);&#10;      this.time = new Date(this.time);&#10;    };&#10;  }&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="timeExample.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;form name=&quot;$ctrl.timeForm&quot;&gt;&#10; &lt;strong&gt;Default&lt;/strong&gt;:&#10; &lt;input type=&quot;time&quot; ng-model=&quot;$ctrl.time&quot; step=&quot;any&quot; /&gt;&lt;br&gt;&#10; &lt;strong&gt;With options&lt;/strong&gt;:&#10; &lt;input type=&quot;time&quot; name=&quot;timeFormatted&quot; ng-model=&quot;$ctrl.time&quot; step=&quot;any&quot; ng-model-options=&quot;$ctrl.options&quot; /&gt;&#10; &lt;br&gt;&#10;&#10; Options:&lt;br&gt;&#10; &lt;code&gt;timeSecondsFormat&lt;/code&gt;:&#10; &lt;input&#10;   type=&quot;text&quot;&#10;   ng-model=&quot;$ctrl.options.timeSecondsFormat&quot;&#10;   ng-change=&quot;$ctrl.optionChange()&quot;&gt;&#10; &lt;br&gt;&#10; &lt;code&gt;timeStripZeroSeconds&lt;/code&gt;:&#10; &lt;input&#10;   type=&quot;checkbox&quot;&#10;   ng-model=&quot;$ctrl.options.timeStripZeroSeconds&quot;&#10;   ng-change=&quot;$ctrl.optionChange()&quot;&gt;&#10;&lt;/form&gt;</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngModelOptions-time-format/index.html" name="example-ngModelOptions-time-format"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2 id="ngModelOptions-info">Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 10.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    
+
+    
+    <li>as attribute:
+        <pre><code>&lt;ANY&#10;  ng-model-options=&quot;Object&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3 id="ngModelOptions-arguments">Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        ngModelOptions
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a>
+      </td>
+      <td>
+        <p>options to apply to <a href="api/ng/directive/ngModel"><code>ngModel</code></a> directives on this element and
+  and its descendents.</p>
+<p><strong>General options</strong>:</p>
+<ul>
+<li><p><code>updateOn</code>: string specifying which event should the input be bound to. You can set several
+events using an space delimited list. There is a special event called <code>default</code> that
+matches the default events belonging to the control. These are the events that are bound to
+the control, and when fired, update the <code>$viewValue</code> via <code>$setViewValue</code>.</p>
+<p><code>ngModelOptions</code> considers every event that is not listed in <code>updateOn</code> a &quot;default&quot; event,
+since different control types use different default events.</p>
+<p>See also the section <a href="api/ng/directive/ngModelOptions#triggering-and-debouncing-model-updates">Triggering and debouncing model updates</a>.</p>
+</li>
+<li><p><code>debounce</code>: integer value which contains the debounce model update value in milliseconds. A
+value of 0 triggers an immediate update. If an object is supplied instead, you can specify a
+custom value for each event. For example:</p>
+<pre><code>ng-model-options=&quot;{
+  updateOn: &#39;default blur&#39;,
+  debounce: { &#39;default&#39;: 500, &#39;blur&#39;: 0 }
+}&quot;
+</code></pre>
+<p>You can use the <code>*</code> key to specify a debounce value that applies to all events that are not
+specifically listed. In the following example, <code>mouseup</code> would have a debounce delay of 1000:</p>
+<pre><code>ng-model-options=&quot;{
+  updateOn: &#39;default blur mouseup&#39;,
+  debounce: { &#39;default&#39;: 500, &#39;blur&#39;: 0, &#39;*&#39;: 1000 }
+}&quot;
+</code></pre>
+</li>
+<li><code>allowInvalid</code>: boolean value which indicates that the model can be set with values that did
+not validate correctly instead of the default behavior of setting the model to undefined.</li>
+<li><code>getterSetter</code>: boolean value which determines whether or not to treat functions bound to
+<code>ngModel</code> as getters/setters.</li>
+</ul>
+<p> <strong>Input-type specific options</strong>:</p>
+<ul>
+<li><p><code>timezone</code>: Defines the timezone to be used to read/write the <code>Date</code> instance in the model for
+<code>&lt;input type=&quot;date&quot; /&gt;</code>, <code>&lt;input type=&quot;time&quot; /&gt;</code>, ... . It understands UTC/GMT and the
+continental US time zone abbreviations, but for general use, use a time zone offset, for
+example, <code>&#39;+0430&#39;</code> (4 hours, 30 minutes east of the Greenwich meridian)
+If not specified, the timezone of the browser will be used.
+Note that changing the timezone will have no effect on the current date, and is only applied after
+the next input / model change.</p>
+</li>
+<li><p><code>timeSecondsFormat</code>: Defines if the <code>time</code> and <code>datetime-local</code> types should show seconds and
+milliseconds. The option follows the format string of <a href="api/ng/filter/date">date filter</a>.
+By default, the options is <code>undefined</code> which is equal to <code>&#39;ss.sss&#39;</code> (seconds and milliseconds).
+The other options are <code>&#39;ss&#39;</code> (strips milliseconds), and <code>&#39;&#39;</code> (empty string), which strips both
+seconds and milliseconds.
+Note that browsers that support <code>time</code> and <code>datetime-local</code> require the hour and minutes
+part of the time string, and may show the value differently in the user interface.
+<a href="api/ng/directive/ngModelOptions#formatting-the-value-of-time-and-datetime-local-">See the example</a>.</p>
+</li>
+<li><p><code>timeStripZeroSeconds</code>: Defines if the <code>time</code> and <code>datetime-local</code> types should strip the
+seconds and milliseconds from the formatted value if they are zero. This option is applied
+after <code>timeSecondsFormat</code>.
+This option can be used to make the formatting consistent over different browsers, as some
+browsers with support for <code>time</code> will natively hide the milliseconds and
+seconds if they are zero, but others won&#39;t, and browsers that don&#39;t implement these input
+types will always show the full string.
+<a href="api/ng/directive/ngModelOptions#formatting-the-value-of-time-and-datetime-local-">See the example</a>.</p>
+</li>
+</ul>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+</div>
+
+

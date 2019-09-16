@@ -1,0 +1,25 @@
+<div>
+  <div class="prop-unit">
+    Binding to a property without security context:
+    <div class="prop-binding" ng-prop-inner_text="$ctrl.safeContent"></div>
+    <span class="prop-note">innerText</span> (safeContent)
+  </div>
+
+  <div class="prop-unit">
+    "Safe" content that requires a security context will throw because the contents could potentially be dangerous ...
+    <div class="prop-binding" ng-prop-inner_h_t_m_l="$ctrl.safeContent"></div>
+    <span class="prop-note">innerHTML</span> (safeContent)
+  </div>
+
+  <div class="prop-unit">
+    ... so that actually dangerous content cannot be executed:
+    <div class="prop-binding" ng-prop-inner_h_t_m_l="$ctrl.unsafeContent"></div>
+    <span class="prop-note">innerHTML</span> (unsafeContent)
+  </div>
+
+  <div class="prop-unit">
+    ... but unsafe Content that has been trusted explicitly works - only do this if you are 100% sure!
+    <div class="prop-binding" ng-prop-inner_h_t_m_l="$ctrl.trustedUnsafeContent"></div>
+    <span class="prop-note">innerHTML</span> (trustedUnsafeContent)
+  </div>
+</div>

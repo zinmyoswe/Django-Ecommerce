@@ -1,0 +1,289 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ngSanitize/sanitize.js?message=docs($sanitizeProvider)%3A%20describe%20your%20change...#L139' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ngSanitize/sanitize.js#L139' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$sanitizeProvider</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  <li>
+    <a href="api/ngSanitize/service/$sanitize">- $sanitize</a>
+  </li>
+
+    <li>
+      - provider in module <a href="api/ngSanitize">ngSanitize</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>Creates and configures <a href="api/ngSanitize/service/$sanitize"><code>$sanitize</code></a> instance.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  
+
+  
+<h2 id="$sanitizeProvider-methods">Methods</h2>
+<ul class="methods">
+  <li>
+    <h3 id="enableSvg"><p><code>enableSvg([flag]);</code></p>
+
+</h3>
+    <div><p>Enables a subset of svg to be supported by the sanitizer.</p>
+<div class="alert alert-warning">
+  <p>By enabling this setting without taking other precautions, you might expose your
+  application to click-hijacking attacks. In these attacks, sanitized svg elements could be positioned
+  outside of the containing element and be rendered over other elements on the page (e.g. a login
+  link). Such behavior can then result in phishing incidents.</p>
+
+  <p>To protect against these, explicitly setup <code>overflow: hidden</code> css rule for all potential svg
+  tags within the sanitized content:</p>
+
+  <br>
+
+  <pre><code>
+  .rootOfTheIncludedContent svg {
+    overflow: hidden !important;
+  }
+  </code></pre>
+</div></div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        flag
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-boolean">boolean</a>
+      </td>
+      <td>
+        <p>Enable or disable SVG support in the sanitizer.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-boolean">boolean</a><a href="" class="label type-hint type-hint-object">$sanitizeProvider</a></td>
+    <td><p>Returns the currently configured value if called
+   without an argument or self for chaining otherwise.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li>
+    <h3 id="addValidElements"><p><code>addValidElements(elements);</code></p>
+
+</h3>
+    <div><p>Extends the built-in lists of valid HTML/SVG elements, i.e. elements that are considered safe
+and are not stripped off during sanitization. You can extend the following lists of elements:</p>
+<ul>
+<li><p><code>htmlElements</code>: A list of elements (tag names) to extend the current list of safe HTML
+elements. HTML elements considered safe will not be removed during sanitization. All other
+elements will be stripped off.</p>
+</li>
+<li><p><code>htmlVoidElements</code>: This is similar to <code>htmlElements</code>, but marks the elements as
+&quot;void elements&quot; (similar to HTML
+<a href="https://rawgit.com/w3c/html/html5.1-2/single-page.html#void-elements">void elements</a>). These
+elements have no end tag and cannot have content.</p>
+</li>
+<li><p><code>svgElements</code>: This is similar to <code>htmlElements</code>, but for SVG elements. This list is only
+taken into account if SVG is <a href="api/ngSanitize/provider/$sanitizeProvider#enableSvg">enabled</a> for
+<code>$sanitize</code>.</p>
+</li>
+</ul>
+<div class="alert alert-info">
+  This method must be called during the <a href="api/ng/type/angular.Module#config">config</a> phase. Once the
+  <code>$sanitize</code> service has been instantiated, this method has no effect.
+</div>
+
+<div class="alert alert-warning">
+  Keep in mind that extending the built-in lists of elements may expose your app to XSS or
+  other vulnerabilities. Be very mindful of the elements you add.
+</div></div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        elements
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array.&lt;String&gt;</a><a href="" class="label type-hint type-hint-object">Object</a>
+      </td>
+      <td>
+        <p>A list of valid HTML elements or an object with one or
+  more of the following properties:</p>
+<ul>
+<li><strong>htmlElements</strong> - <code>{Array&lt;String&gt;}</code> - A list of elements to extend the current list of
+HTML elements.</li>
+<li><strong>htmlVoidElements</strong> - <code>{Array&lt;String&gt;}</code> - A list of elements to extend the current list of
+void HTML elements; i.e. elements that do not have an end tag.</li>
+<li><strong>svgElements</strong> - <code>{Array&lt;String&gt;}</code> - A list of elements to extend the current list of SVG
+elements. The list of SVG elements is only taken into account if SVG is
+<a href="api/ngSanitize/provider/$sanitizeProvider#enableSvg">enabled</a> for <code>$sanitize</code>.</li>
+</ul>
+<p>Passing an array (<code>[...]</code>) is equivalent to passing <code>{htmlElements: [...]}</code>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-object">$sanitizeProvider</a></td>
+    <td><p>Returns self for chaining.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li>
+    <h3 id="addValidAttrs"><p><code>addValidAttrs(attrs);</code></p>
+
+</h3>
+    <div><p>Extends the built-in list of valid attributes, i.e. attributes that are considered safe and are
+not stripped off during sanitization.</p>
+<p><strong>Note</strong>:
+The new attributes will not be treated as URI attributes, which means their values will not be
+sanitized as URIs using <code>$compileProvider</code>&#39;s
+<a href="api/ng/provider/$compileProvider#aHrefSanitizationWhitelist">aHrefSanitizationWhitelist</a> and
+<a href="api/ng/provider/$compileProvider#imgSrcSanitizationWhitelist">imgSrcSanitizationWhitelist</a>.</p>
+<div class="alert alert-info">
+  This method must be called during the <a href="api/ng/type/angular.Module#config">config</a> phase. Once the
+  <code>$sanitize</code> service has been instantiated, this method has no effect.
+</div>
+
+<div class="alert alert-warning">
+  Keep in mind that extending the built-in list of attributes may expose your app to XSS or
+  other vulnerabilities. Be very mindful of the attributes you add.
+</div></div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        attrs
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array&lt;String&gt;</a>
+      </td>
+      <td>
+        <p>A list of valid attributes.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-object">$sanitizeProvider</a></td>
+    <td><p>Returns self for chaining.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  </ul>
+  
+  
+
+
+
+  
+</div>
+
+

@@ -1,0 +1,109 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ngMock/angular-mocks.js?message=docs($verifyNoPendingTasks)%3A%20describe%20your%20change...#L282' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ngMock/angular-mocks.js#L282' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$verifyNoPendingTasks</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  
+
+    <li>
+      - service in module <a href="api/ngMock">ngMock</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>Verifies that there are no pending tasks that need to be flushed. It throws an error if there are
+still pending tasks.</p>
+<p>You can check for a specific type of tasks only, by specifying a <code>taskType</code>.</p>
+<p>Available task types:</p>
+<ul>
+<li><code>$timeout</code>: Pending timeouts (via <a href="api/ngMock/service/$timeout"><code>$timeout</code></a>).</li>
+<li><code>$http</code>: Pending HTTP requests (via <a href="api/ng/service/$http"><code>$http</code></a>).</li>
+<li><code>$route</code>: In-progress route transitions (via <a href="api/ngRoute/service/$route"><code>$route</code></a>).</li>
+<li><code>$applyAsync</code>: Pending tasks scheduled via <a href="api/ng/type/$rootScope.Scope#$applyAsync">$applyAsync</a>.</li>
+<li><code>$evalAsync</code>: Pending tasks scheduled via <a href="api/ng/type/$rootScope.Scope#$evalAsync">$evalAsync</a>.
+These include tasks scheduled via <code>$evalAsync()</code> indirectly (such as <a href="api/ng/service/$q"><code>$q</code></a> promises).</li>
+</ul>
+<div class="alert alert-info">
+  Periodic tasks scheduled via <a href="api/ngMock/service/$interval"><code>$interval</code></a> use a different queue and are not taken into
+  account by <code>$verifyNoPendingTasks()</code>. There is currently no way to verify that there are no
+  pending <a href="api/ngMock/service/$interval"><code>$interval</code></a> tasks.
+</div>
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  <h2 id="usage">Usage</h2>
+    
+      <p><code>$verifyNoPendingTasks([taskType]);</code></p>
+
+
+    
+
+    
+<section class="api-section">
+  <h3 id="$verifyNoPendingTasks-arguments">Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        taskType
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>The type of tasks to check for.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+    
+
+    
+
+  
+  
+  
+
+
+
+  
+</div>
+
+

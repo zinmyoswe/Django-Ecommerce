@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ng-class-odd-animate-debug</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-animate.js"></script>
+  
+
+  
+</head>
+<body ng-app="ngAnimate">
+  <div ng-init="items=['Item 3', 'Item 2', 'Item 1', 'Item 0']">
+  <button ng-click="items.unshift('Item ' + items.length)">Add item</button>
+  <hr />
+  <table>
+    <tr ng-repeat="item in items" ng-class-odd="'odd'">
+      <td>{{ item }}</td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

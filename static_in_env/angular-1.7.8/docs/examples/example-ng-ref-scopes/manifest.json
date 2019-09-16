@@ -1,0 +1,10 @@
+{
+  "name": "example-ng-ref-scopes",
+  "files": [
+    "index-production.html",
+    "index.js",
+    "root.html",
+    "styles.css",
+    "protractor.js"
+  ]
+}

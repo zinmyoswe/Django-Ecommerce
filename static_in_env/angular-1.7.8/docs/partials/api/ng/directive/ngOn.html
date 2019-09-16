@@ -1,0 +1,169 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ng/compile.js?message=docs(ngOn)%3A%20describe%20your%20change...#L1240' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ng/compile.js#L1240' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngOn</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>The <code>ngOn</code> directive adds an event listener to a DOM element via
+<a href="api/ng/function/angular.element">angular.element().on()</a>, and evaluates an expression when the event is
+fired.
+<code>ngOn</code> allows adding listeners for arbitrary events by including
+the event name in the attribute, e.g. <code>ng-on-drop=&quot;onDrop()&quot;</code> executes the &#39;onDrop()&#39; expression
+when the <code>drop</code> event is fired.</p>
+<p>AngularJS provides specific directives for many events, such as <a href="api/ng/directive/ngClick"><code>ngClick</code></a>, so in most
+cases it is not necessary to use <code>ngOn</code>. However, AngularJS does not support all events
+(e.g. the <code>drop</code> event in the example above), and new events might be introduced in later DOM
+standards.</p>
+<p>Another use-case for <code>ngOn</code> is listening to
+<a href="https://developer.mozilla.org/docs/Web/Guide/Events/Creating_and_triggering_events">custom events</a>
+fired by
+<a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_custom_elements">custom elements</a>.</p>
+<h2 id="binding-to-camelcase-properties">Binding to camelCase properties</h2>
+<p>Since HTML attributes are case-insensitive, camelCase properties like <code>myEvent</code> must be escaped.
+AngularJS uses the underscore (_) in front of a character to indicate that it is uppercase, so
+<code>myEvent</code> must be written as <code>ng-on-my_event=&quot;expression&quot;</code>.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2 id="ngOn-info">Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <pre><code class="lang-html">&lt;ANY ng-on-eventname=&quot;expression&quot;&gt;
+&lt;/ANY&gt;
+</code></pre>
+<p>or with uppercase letters in property (e.g. &quot;eventName&quot;):</p>
+<pre><code class="lang-html">&lt;ANY ng-on-event_name=&quot;expression&quot;&gt;
+&lt;/ANY&gt;
+</code></pre>
+
+  
+  </div>
+  
+  
+
+  
+  <h2 id="examples">Examples</h2><h3 id="bind-to-built-in-dom-events">Bind to built-in DOM events</h3>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngOn"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngOn"
+      name="ngOn"
+      module="exampleNgOn">
+
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;exampleNgOn&#39;, [])&#10;.component(&#39;main&#39;, {&#10;  templateUrl: &#39;main.html&#39;,&#10;  controller: function() {&#10;    this.clickCount = 0;&#10;    this.mouseoverCount = 0;&#10;&#10;    this.loadingState = 0;&#10;  }&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="main.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div&gt;&#10;  This is equivalent to `ngClick` and `ngMouseover`:&lt;br&gt;&#10;  &lt;button&#10;    ng-on-click=&quot;$ctrl.clickCount = $ctrl.clickCount + 1&quot;&#10;    ng-on-mouseover=&quot;$ctrl.mouseoverCount = $ctrl.mouseoverCount + 1&quot;&gt;Click or mouseover&lt;/button&gt;&lt;br&gt;&#10;  clickCount: {{$ctrl.clickCount}}&lt;br&gt;&#10;  mouseover: {{$ctrl.mouseoverCount}}&#10;&#10;  &lt;hr&gt;&#10;&#10;  For the `error` and `load` event on images no built-in AngularJS directives exist:&lt;br&gt;&#10;  &lt;img src=&quot;thisimagedoesnotexist.png&quot; ng-on-error=&quot;$ctrl.loadingState = -1&quot; ng-on-load=&quot;$ctrl.loadingState = 1&quot;&gt;&lt;br&gt;&#10;  &lt;div ng-switch=&quot;$ctrl.loadingState&quot;&gt;&#10;    &lt;span ng-switch-when=&quot;0&quot;&gt;Image is loading&lt;/span&gt;&#10;    &lt;span ng-switch-when=&quot;-1&quot;&gt;Image load error&lt;/span&gt;&#10;    &lt;span ng-switch-when=&quot;1&quot;&gt;Image loaded successfully&lt;/span&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;main&gt;&lt;/main&gt;</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngOn/index.html" name="example-ngOn"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="bind-to-custom-dom-events">Bind to custom DOM events</h3>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngOnCustom"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngOnCustom"
+      name="ngOnCustom"
+      module="exampleNgOn">
+
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;exampleNgOn&#39;, [])&#10;.component(&#39;main&#39;, {&#10;  templateUrl: &#39;main.html&#39;,&#10;  controller: function() {&#10;    this.eventLog = &#39;&#39;;&#10;&#10;    this.listener = function($event) {&#10;      this.eventLog = &#39;Event with type &quot;&#39; + $event.type + &#39;&quot; fired at &#39; + $event.detail;&#10;    };&#10;  }&#10;})&#10;.component(&#39;childComponent&#39;, {&#10;  templateUrl: &#39;child.html&#39;,&#10;  controller: function($element) {&#10;    this.fireEvent = function() {&#10;      var event = new CustomEvent(&#39;customtype&#39;, { detail: new Date()});&#10;&#10;      $element[0].dispatchEvent(event);&#10;    };&#10;  }&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="main.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;child-component ng-on-customtype=&quot;$ctrl.listener($event)&quot;&gt;&lt;/child-component&gt;&lt;br&gt;&#10;&lt;span&gt;Event log: {{$ctrl.eventLog}}&lt;/span&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="child.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;button ng-click=&quot;$ctrl.fireEvent()&quot;&gt;Fire custom event&lt;/button&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;main&gt;&lt;/main&gt;</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ngOnCustom/index.html" name="example-ngOnCustom"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

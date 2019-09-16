@@ -1,0 +1,85 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ngCookies/cookies.js?message=docs($cookiesProvider)%3A%20describe%20your%20change...#L16' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ngCookies/cookies.js#L16' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$cookiesProvider</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  <li>
+    <a href="api/ngCookies/service/$cookies">- $cookies</a>
+  </li>
+
+    <li>
+      - provider in module <a href="api/ngCookies">ngCookies</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>Use <code>$cookiesProvider</code> to change the default behavior of the <a href="api/ngCookies/service/$cookies">$cookies</a> service.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  
+
+  
+  
+  
+<h2 id="$cookiesProvider-properties">Properties</h2>
+<ul class="properties">
+  <li>
+    <h3 id="defaults"><code>defaults</code></h3>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td></td>
+    <td><p>Object containing default options to pass when setting cookies.</p>
+<p>The object may have following properties:</p>
+<ul>
+<li><strong>path</strong> - <code>{string}</code> - The cookie will be available only for this path and its
+sub-paths. By default, this is the URL that appears in your <code>&lt;base&gt;</code> tag.</li>
+<li><strong>domain</strong> - <code>{string}</code> - The cookie will be available only for this domain and
+its sub-domains. For security reasons the user agent will not accept the cookie
+if the current domain is not a sub-domain of this domain or equal to it.</li>
+<li><strong>expires</strong> - <code>{string|Date}</code> - String of the form &quot;Wdy, DD Mon YYYY HH:MM:SS GMT&quot;
+or a Date object indicating the exact date/time this cookie will expire.</li>
+<li><strong>secure</strong> - <code>{boolean}</code> - If <code>true</code>, then the cookie will only be available through a
+secured connection.</li>
+<li><strong>samesite</strong> - <code>{string}</code> - prevents the browser from sending the cookie along with cross-site requests.
+Accepts the values <code>lax</code> and <code>strict</code>. See the <a href="https://www.owasp.org/index.php/SameSite">OWASP Wiki</a>
+for more info. Note that as of May 2018, not all browsers support <code>SameSite</code>,
+so it cannot be used as a single measure against Cross-Site-Request-Forgery (CSRF) attacks.</li>
+</ul>
+<p>Note: By default, the address that appears in your <code>&lt;base&gt;</code> tag will be used as the path.
+This is important so that cookies will be visible for all routes when html5mode is enabled.</p>
+</td>
+  </tr>
+</table>
+    
+  </li>
+  </ul>
+
+
+
+  
+</div>
+
+

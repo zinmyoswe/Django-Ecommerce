@@ -1,0 +1,22 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/docs/content/error/$compile/srcset.ngdoc?message=docs(error%2Fsrcset)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: $compile:srcset
+  <div><span class='hint'>Invalid value passed to `attr.$set('srcset', value)`</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="Can't pass trusted values to `{0}`: "{1}"">Can't pass trusted values to `{0}`: "{1}"</pre>
+</div>
+
+<h2 id="description">Description</h2>
+<div class="description">
+  <p>This error occurs if you try to programmatically set the <code>srcset</code> attribute with a non-string value.</p>
+<p>This can be the case if you tried to avoid the automatic sanitization of the <code>srcset</code> value by
+passing a &quot;trusted&quot; value provided by calls to <code>$sce.trustAsMediaUrl(value)</code>.</p>
+<p>If you want to programmatically set explicitly trusted unsafe URLs, you should use <code>$sce.trustAsHtml</code>
+on the whole <code>img</code> tag and inject it into the DOM using the <code>ng-bind-html</code> directive.</p>
+
+</div>
+
+

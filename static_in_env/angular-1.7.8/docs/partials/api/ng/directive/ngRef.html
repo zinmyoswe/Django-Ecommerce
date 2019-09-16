@@ -1,0 +1,226 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ng/directive/ngRef.js?message=docs(ngRef)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ng/directive/ngRef.js#L3' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngRef</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>The <code>ngRef</code> attribute tells AngularJS to assign the controller of a component (or a directive)
+to the given property in the current scope. It is also possible to add the jqlite-wrapped DOM
+element to the scope.</p>
+<p>If the element with <code>ngRef</code> is destroyed <code>null</code> is assigned to the property.</p>
+<p>Note that if you want to assign from a child into the parent scope, you must initialize the
+target property on the parent scope, otherwise <code>ngRef</code> will assign on the child scope.
+This commonly happens when assigning elements or components wrapped in <a href="api/ng/directive/ngIf"><code>ngIf</code></a> or
+<a href="api/ng/directive/ngRepeat"><code>ngRepeat</code></a>. See the second example below.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2 id="ngRef-info">Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    
+
+    
+    
+    <li>as attribute:
+        <pre><code>&lt;ANY&#10;  ng-ref=&quot;string&quot;&#10;  [ng-ref-read=&quot;string&quot;]&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3 id="ngRef-arguments">Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        ngRef
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>property name - A valid AngularJS expression identifier to which the
+                      controller or jqlite-wrapped DOM element will be bound.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngRefRead
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>read value - The name of a directive (or component) on this element,
+                           or the special string <code>$element</code>. If a name is provided, <code>ngRef</code> will
+                           assign the matching controller. If <code>$element</code> is provided, the element
+                           itself is assigned (even if a controller is available).</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+  <h2 id="examples">Examples</h2><h3 id="simple-toggle">Simple toggle</h3>
+<p>This example shows how the controller of the component toggle
+is reused in the template through the scope to use its logic.
+
+
+<div>
+  <plnkr-opener example-path="examples/example-ng-ref-component"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ng-ref-component"
+      name="ng-ref-component"
+      module="myApp">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;my-toggle ng-ref=&quot;myToggle&quot;&gt;&lt;/my-toggle&gt;&#10;&lt;button ng-click=&quot;myToggle.toggle()&quot;&gt;Toggle&lt;/button&gt;&#10;&lt;div ng-show=&quot;myToggle.isOpen()&quot;&gt;&#10;  You are using a component in the same template to show it.&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;myApp&#39;, [])&#10;.component(&#39;myToggle&#39;, {&#10;  controller: function ToggleController() {&#10;    var opened = false;&#10;    this.isOpen = function() { return opened; };&#10;    this.toggle = function() { opened = !opened; };&#10;  }&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>it(&#39;should publish the toggle into the scope&#39;, function() {&#10;  var toggle = element(by.buttonText(&#39;Toggle&#39;));&#10;  expect(toggle.evaluate(&#39;myToggle.isOpen()&#39;)).toEqual(false);&#10;  toggle.click();&#10;  expect(toggle.evaluate(&#39;myToggle.isOpen()&#39;)).toEqual(true);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ng-ref-component/index.html" name="example-ng-ref-component"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="ngref-inside-scopes">ngRef inside scopes</h3>
+<p>This example shows how <code>ngRef</code> works with child scopes. The <code>ngRepeat</code>-ed <code>myWrapper</code> components
+are assigned to the scope of <code>myRoot</code>, because the <code>toggles</code> property has been initialized.
+The repeated <code>myToggle</code> components are published to the child scopes created by <code>ngRepeat</code>.
+<code>ngIf</code> behaves similarly - the assignment of <code>myToggle</code> happens in the <code>ngIf</code> child scope,
+because the target property has not been initialized on the <code>myRoot</code> component controller.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ng-ref-scopes"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ng-ref-scopes"
+      name="ng-ref-scopes"
+      module="myApp">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;my-root&gt;&lt;/my-root&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;myApp&#39;, [])&#10;.component(&#39;myRoot&#39;, {&#10;  templateUrl: &#39;root.html&#39;,&#10;  controller: function() {&#10;    this.wrappers = []; // initialize the array so that the wrappers are assigned into the parent scope&#10;  }&#10;})&#10;.component(&#39;myToggle&#39;, {&#10;  template: &#39;&lt;strong&gt;myToggle&lt;/strong&gt;&lt;button ng-click=&quot;$ctrl.toggle()&quot; ng-transclude&gt;&lt;/button&gt;&#39;,&#10;  transclude: true,&#10;  controller: function ToggleController() {&#10;    var opened = false;&#10;    this.isOpen = function() { return opened; };&#10;    this.toggle = function() { opened = !opened; };&#10;  }&#10;})&#10;.component(&#39;myWrapper&#39;, {&#10;  transclude: true,&#10;  template: &#39;&lt;strong&gt;myWrapper&lt;/strong&gt;&#39; +&#10;    &#39;&lt;div&gt;ngRepeatToggle.isOpen(): {{$ctrl.ngRepeatToggle.isOpen() | json}}&lt;/div&gt;&#39; +&#10;    &#39;&lt;my-toggle ng-ref=&quot;$ctrl.ngRepeatToggle&quot;&gt;&lt;ng-transclude&gt;&lt;/ng-transclude&gt;&lt;/my-toggle&gt;&#39;&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="root.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;strong&gt;myRoot&lt;/strong&gt;&#10;&lt;my-toggle ng-ref=&quot;$ctrl.outerToggle&quot;&gt;Outer Toggle&lt;/my-toggle&gt;&#10;&lt;div&gt;outerToggle.isOpen(): {{$ctrl.outerToggle.isOpen() | json}}&lt;/div&gt;&#10;&lt;div&gt;&lt;em&gt;wrappers assigned to root&lt;/em&gt;&lt;br&gt;&#10;&lt;div ng-repeat=&quot;wrapper in $ctrl.wrappers&quot;&gt;&#10;  wrapper.ngRepeatToggle.isOpen(): {{wrapper.ngRepeatToggle.isOpen() | json}}&#10;&lt;/div&gt;&#10;&#10;&lt;ul&gt;&#10;  &lt;li ng-repeat=&quot;(index, value) in [1,2,3]&quot;&gt;&#10;    &lt;strong&gt;ngRepeat&lt;/strong&gt;&#10;    &lt;div&gt;outerToggle.isOpen(): {{$ctrl.outerToggle.isOpen() | json}}&lt;/div&gt;&#10;    &lt;my-wrapper ng-ref=&quot;$ctrl.wrappers[index]&quot;&gt;ngRepeat Toggle {{$index + 1}}&lt;/my-wrapper&gt;&#10;  &lt;/li&gt;&#10;&lt;/ul&gt;&#10;&#10;&lt;div&gt;ngIfToggle.isOpen(): {{ngIfToggle.isOpen()}} // This is always undefined because it&#39;s&#10;  assigned to the child scope created by ngIf.&#10;&lt;/div&gt;&#10;&lt;div ng-if=&quot;true&quot;&gt;&#10;      &lt;strong&gt;ngIf&lt;/strong&gt;&#10;   &lt;my-toggle ng-ref=&quot;ngIfToggle&quot;&gt;ngIf Toggle&lt;/my-toggle&gt;&#10;   &lt;div&gt;ngIfToggle.isOpen(): {{ngIfToggle.isOpen() | json}}&lt;/div&gt;&#10;   &lt;div&gt;outerToggle.isOpen(): {{$ctrl.outerToggle.isOpen() | json}}&lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="styles.css"
+      language="css"
+      type="css">
+      <pre><code>ul {&#10;  list-style: none;&#10;  padding-left: 0;&#10;}&#10;&#10;li[ng-repeat] {&#10;  background: lightgreen;&#10;  padding: 8px;&#10;  margin: 8px;&#10;}&#10;&#10;[ng-if] {&#10;  background: lightgrey;&#10;  padding: 8px;&#10;}&#10;&#10;my-root {&#10;  background: lightgoldenrodyellow;&#10;  padding: 8px;&#10;  display: block;&#10;}&#10;&#10;my-wrapper {&#10;  background: lightsalmon;&#10;  padding: 8px;&#10;  display: block;&#10;}&#10;&#10;my-toggle {&#10;  background: lightblue;&#10;  padding: 8px;&#10;  display: block;&#10;}</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>var OuterToggle = function() {&#10;  this.toggle = function() {&#10;    element(by.buttonText(&#39;Outer Toggle&#39;)).click();&#10;  };&#10;  this.isOpen = function() {&#10;    return element.all(by.binding(&#39;outerToggle.isOpen()&#39;)).first().getText();&#10;  };&#10;};&#10;var NgRepeatToggle = function(i) {&#10;  var parent = element.all(by.repeater(&#39;(index, value) in [1,2,3]&#39;)).get(i - 1);&#10;  this.toggle = function() {&#10;    element(by.buttonText(&#39;ngRepeat Toggle &#39; + i)).click();&#10;  };&#10;  this.isOpen = function() {&#10;    return parent.element(by.binding(&#39;ngRepeatToggle.isOpen() | json&#39;)).getText();&#10;  };&#10;  this.isOuterOpen = function() {&#10;    return parent.element(by.binding(&#39;outerToggle.isOpen() | json&#39;)).getText();&#10;  };&#10;};&#10;var NgRepeatToggles = function() {&#10;  var toggles = [1,2,3].map(function(i) { return new NgRepeatToggle(i); });&#10;  this.forEach = function(fn) {&#10;    toggles.forEach(fn);&#10;  };&#10;  this.isOuterOpen = function(i) {&#10;    return toggles[i - 1].isOuterOpen();&#10;  };&#10;};&#10;var NgIfToggle = function() {&#10;  var parent = element(by.css(&#39;[ng-if]&#39;));&#10;  this.toggle = function() {&#10;    element(by.buttonText(&#39;ngIf Toggle&#39;)).click();&#10;  };&#10;  this.isOpen = function() {&#10;    return by.binding(&#39;ngIfToggle.isOpen() | json&#39;).getText();&#10;  };&#10;  this.isOuterOpen = function() {&#10;    return parent.element(by.binding(&#39;outerToggle.isOpen() | json&#39;)).getText();&#10;  };&#10;};&#10;&#10;it(&#39;should toggle the outer toggle&#39;, function() {&#10;  var outerToggle = new OuterToggle();&#10;  expect(outerToggle.isOpen()).toEqual(&#39;outerToggle.isOpen(): false&#39;);&#10;  outerToggle.toggle();&#10;  expect(outerToggle.isOpen()).toEqual(&#39;outerToggle.isOpen(): true&#39;);&#10;});&#10;&#10;it(&#39;should toggle all outer toggles&#39;, function() {&#10;  var outerToggle = new OuterToggle();&#10;  var repeatToggles = new NgRepeatToggles();&#10;  var ifToggle = new NgIfToggle();&#10;  expect(outerToggle.isOpen()).toEqual(&#39;outerToggle.isOpen(): false&#39;);&#10;  expect(repeatToggles.isOuterOpen(1)).toEqual(&#39;outerToggle.isOpen(): false&#39;);&#10;  expect(repeatToggles.isOuterOpen(2)).toEqual(&#39;outerToggle.isOpen(): false&#39;);&#10;  expect(repeatToggles.isOuterOpen(3)).toEqual(&#39;outerToggle.isOpen(): false&#39;);&#10;  expect(ifToggle.isOuterOpen()).toEqual(&#39;outerToggle.isOpen(): false&#39;);&#10;  outerToggle.toggle();&#10;  expect(outerToggle.isOpen()).toEqual(&#39;outerToggle.isOpen(): true&#39;);&#10;  expect(repeatToggles.isOuterOpen(1)).toEqual(&#39;outerToggle.isOpen(): true&#39;);&#10;  expect(repeatToggles.isOuterOpen(2)).toEqual(&#39;outerToggle.isOpen(): true&#39;);&#10;  expect(repeatToggles.isOuterOpen(3)).toEqual(&#39;outerToggle.isOpen(): true&#39;);&#10;  expect(ifToggle.isOuterOpen()).toEqual(&#39;outerToggle.isOpen(): true&#39;);&#10;});&#10;&#10;it(&#39;should toggle each repeat iteration separately&#39;, function() {&#10;  var repeatToggles = new NgRepeatToggles();&#10;&#10;  repeatToggles.forEach(function(repeatToggle) {&#10;    expect(repeatToggle.isOpen()).toEqual(&#39;ngRepeatToggle.isOpen(): false&#39;);&#10;    expect(repeatToggle.isOuterOpen()).toEqual(&#39;outerToggle.isOpen(): false&#39;);&#10;    repeatToggle.toggle();&#10;    expect(repeatToggle.isOpen()).toEqual(&#39;ngRepeatToggle.isOpen(): true&#39;);&#10;    expect(repeatToggle.isOuterOpen()).toEqual(&#39;outerToggle.isOpen(): false&#39;);&#10;  });&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ng-ref-scopes/index.html" name="example-ng-ref-scopes"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

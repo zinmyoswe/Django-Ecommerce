@@ -1,0 +1,8 @@
+{
+  "name": "example-ng-class-even-animate",
+  "files": [
+    "index-production.html",
+    "style.css",
+    "protractor.js"
+  ]
+}

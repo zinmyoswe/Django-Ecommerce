@@ -1,0 +1,74 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ngMessages/messages.js?message=docs(ngMessageDefault)%3A%20describe%20your%20change...#L699' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ngMessages/messages.js#L699' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngMessageDefault</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ngMessages">ngMessages</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p><code>ngMessageDefault</code> is a directive with the purpose to show and hide a default message for
+<a href="api/ngMessages/directive/ngMessages"><code>ngMessages</code></a>, when none of provided messages matches.</p>
+<p>More information about using <code>ngMessageDefault</code> can be found in the
+<a href="api/ngMessages"><code>ngMessages</code> module documentation</a>.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2 id="ngMessageDefault-info">Directive Info</h2>
+  <ul>
+    <li>This directive creates new scope.</li>
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <p>```html
+<!-- using attribute directives --></p>
+<ANY ng-messages="expression" role="alert">
+  <ANY ng-message="stringValue">...</ANY>
+  <ANY ng-message="stringValue1, stringValue2, ...">...</ANY>
+  <ANY ng-message-default>...</ANY>
+</ANY>
+
+<!-- or by using element directives -->
+<p><ng-messages for="expression" role="alert">
+  <ng-message when="stringValue">...</ng-message>
+  <ng-message when="stringValue1, stringValue2, ...">...</ng-message>
+  <ng-message-default>...</ng-message-default>
+</ng-messages></p>
+
+  
+  </div>
+  
+  
+
+  
+</div>
+
+

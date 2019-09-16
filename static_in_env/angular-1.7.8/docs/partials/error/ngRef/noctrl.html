@@ -1,0 +1,28 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/docs/content/error/ngRef/noctrl.ngdoc?message=docs(error%2Fnoctrl)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: ngRef:noctrl
+  <div><span class='hint'>A controller for the value of `ngRefRead` could not be found on the element.</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="The controller for ngRefRead="{0}" could not be found on ngRef="{1}"">The controller for ngRefRead="{0}" could not be found on ngRef="{1}"</pre>
+</div>
+
+<h2 id="description">Description</h2>
+<div class="description">
+  <p>This error occurs when the <a href="api/ng/directive/ngRef">ngRef directive</a> specifies
+a value in <code>ngRefRead</code> that cannot be resolved to a directive / component controller.</p>
+<p>Causes for this error can be:</p>
+<ol>
+<li>Your <code>ngRefRead</code> value has a typo.</li>
+<li>You have a typo in the <em>registered</em> directive / component name.</li>
+<li>The directive / component does not have a controller.</li>
+</ol>
+<p>Note that <code>ngRefRead</code> takes the name of the component / directive, not the name of controller, and
+also not the combination of directive and &#39;Controller&#39;. For example, for a directive called &#39;myDirective&#39;,
+the correct declaration is <code>&lt;div ng-ref=&quot;$ctrl.ref&quot; ng-ref-read=&quot;myDirective&quot;&gt;</code>.</p>
+
+</div>
+
+

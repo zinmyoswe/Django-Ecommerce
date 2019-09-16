@@ -1,0 +1,18 @@
+<div>
+  This is equivalent to `ngClick` and `ngMouseover`:<br>
+  <button
+    ng-on-click="$ctrl.clickCount = $ctrl.clickCount + 1"
+    ng-on-mouseover="$ctrl.mouseoverCount = $ctrl.mouseoverCount + 1">Click or mouseover</button><br>
+  clickCount: {{$ctrl.clickCount}}<br>
+  mouseover: {{$ctrl.mouseoverCount}}
+
+  <hr>
+
+  For the `error` and `load` event on images no built-in AngularJS directives exist:<br>
+  <img src="thisimagedoesnotexist.png" ng-on-error="$ctrl.loadingState = -1" ng-on-load="$ctrl.loadingState = 1"><br>
+  <div ng-switch="$ctrl.loadingState">
+    <span ng-switch-when="0">Image is loading</span>
+    <span ng-switch-when="-1">Image load error</span>
+    <span ng-switch-when="1">Image loaded successfully</span>
+  </div>
+</div>

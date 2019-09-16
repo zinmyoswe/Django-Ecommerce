@@ -1,0 +1,88 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ngMock/angular-mocks.js?message=docs($animate)%3A%20describe%20your%20change...#L889' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ngMock/angular-mocks.js#L889' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$animate</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  
+
+    <li>
+      - service in module <a href="api/ngMock">ngMock</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>Mock implementation of the <a href="api/ng/service/$animate"><code>$animate</code></a> service. Exposes two additional methods
+for testing animations.</p>
+<p>You need to require the <code>ngAnimateMock</code> module in your test suite for instance <code>beforeEach(module(&#39;ngAnimateMock&#39;))</code></p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  
+
+  
+<h2 id="$animate-methods">Methods</h2>
+<ul class="methods">
+  <li>
+    <h3 id="closeAndFlush"><p><code>closeAndFlush();</code></p>
+
+</h3>
+    <div><p>This method will close all pending animations (both <a href="api/ngAnimate#javascript-based-animations">Javascript</a>
+and <a href="api/ngAnimate/service/$animateCss">CSS</a>) and it will also flush any remaining animation frames and/or callbacks.</p>
+</div>
+
+    
+
+    
+
+    
+
+    </li>
+  
+  <li>
+    <h3 id="flush"><p><code>flush();</code></p>
+
+</h3>
+    <div><p>This method is used to flush the pending callbacks and animation frames to either start
+an animation or conclude an animation. Note that this will not actually close an
+actively running animation (see <a href="api/ngMock/service/$animate#closeAndFlush"><code>closeAndFlush()</code></a> for that).</p>
+</div>
+
+    
+
+    
+
+    
+
+    </li>
+  </ul>
+  
+  
+
+
+
+  
+</div>
+
+

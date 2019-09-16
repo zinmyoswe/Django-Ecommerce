@@ -1,0 +1,206 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ng/directive/ngClass.js?message=docs(ngClassOdd)%3A%20describe%20your%20change...#L333' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ng/directive/ngClass.js#L333' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngClassOdd</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>The <code>ngClassOdd</code> and <code>ngClassEven</code> directives work exactly as
+<a href="api/ng/directive/ngClass">ngClass</a>, except they work in
+conjunction with <code>ngRepeat</code> and take effect only on odd (even) rows.</p>
+<p>This directive can be applied only within the scope of an
+<a href="api/ng/directive/ngRepeat">ngRepeat</a>.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2 id="ngClassOdd-info">Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    
+
+    
+    <li>as attribute:
+        <pre><code>&lt;ANY&#10;  ng-class-odd=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+      </li>
+    <li>as CSS class:
+        <pre><code>&lt;ANY class=&quot;ng-class-odd: expression;&quot;&gt; ... &lt;/ANY&gt;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3 id="ngClassOdd-arguments">Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        ngClassOdd
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-expression">expression</a>
+      </td>
+      <td>
+        <p><a href="guide/expression">Expression</a> to eval. The result
+  of the evaluation can be a string representing space delimited class names or an array.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+  <h2 id="animations">Animations</h2>
+  <table>
+<thead>
+<tr>
+<th>Animation</th>
+<th>Occurs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="api/ng/service/$animate#addClass">addClass</a></td>
+<td>just before the class is applied to the element</td>
+</tr>
+<tr>
+<td><a href="api/ng/service/$animate#removeClass">removeClass</a></td>
+<td>just before the class is removed from the element</td>
+</tr>
+</tbody>
+</table>
+
+  <a href="api/ngAnimate/service/$animate">Click here</a> to learn more about the steps involved in the animation.
+
+  
+  <h2 id="examples">Examples</h2><p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ng-class-odd"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ng-class-odd"
+      name="ng-class-odd">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;ol ng-init=&quot;names=[&#39;John&#39;, &#39;Mary&#39;, &#39;Cate&#39;, &#39;Suz&#39;]&quot;&gt;&#10;  &lt;li ng-repeat=&quot;name in names&quot;&gt;&#10;   &lt;span ng-class-odd=&quot;&#39;odd&#39;&quot; ng-class-even=&quot;&#39;even&#39;&quot;&gt;&#10;     {{name}}&#10;   &lt;/span&gt;&#10;  &lt;/li&gt;&#10;&lt;/ol&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="style.css"
+      language="css"
+      type="css">
+      <pre><code>.odd {&#10;  color: red;&#10;}&#10;.even {&#10;  color: blue;&#10;}</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>it(&#39;should check ng-class-odd and ng-class-even&#39;, function() {&#10;  expect(element(by.repeater(&#39;name in names&#39;).row(0).column(&#39;name&#39;)).getAttribute(&#39;class&#39;)).&#10;    toMatch(/odd/);&#10;  expect(element(by.repeater(&#39;name in names&#39;).row(1).column(&#39;name&#39;)).getAttribute(&#39;class&#39;)).&#10;    toMatch(/even/);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ng-class-odd/index.html" name="example-ng-class-odd"></iframe>
+  </div>
+</div>
+
+
+</p>
+<hr /><p>An example on how to implement animations using <code>ngClassOdd</code>:</p>
+<p>   
+
+<div>
+  <plnkr-opener example-path="examples/example-ng-class-odd-animate"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ng-class-odd-animate"
+      module="ngAnimate"
+      deps="angular-animate.js"
+      animations="true"
+      name="ng-class-odd-animate">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-init=&quot;items=[&#39;Item 3&#39;, &#39;Item 2&#39;, &#39;Item 1&#39;, &#39;Item 0&#39;]&quot;&gt;&#10;  &lt;button ng-click=&quot;items.unshift(&#39;Item &#39; + items.length)&quot;&gt;Add item&lt;/button&gt;&#10;  &lt;hr /&gt;&#10;  &lt;table&gt;&#10;    &lt;tr ng-repeat=&quot;item in items&quot; ng-class-odd=&quot;&#39;odd&#39;&quot;&gt;&#10;      &lt;td&gt;{{ item }}&lt;/td&gt;&#10;    &lt;/tr&gt;&#10;  &lt;/table&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="style.css"
+      language="css"
+      type="css">
+      <pre><code>.odd {&#10;  background: rgba(255, 255, 0, 0.25);&#10;}&#10;&#10;.odd-add, .odd-remove {&#10;  transition: 1.5s;&#10;}</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>it(&#39;should add new entries to the beginning of the list&#39;, function() {&#10;  var button = element(by.buttonText(&#39;Add item&#39;));&#10;  var rows = element.all(by.repeater(&#39;item in items&#39;));&#10;&#10;  expect(rows.count()).toBe(4);&#10;  expect(rows.get(0).getText()).toBe(&#39;Item 3&#39;);&#10;  expect(rows.get(1).getText()).toBe(&#39;Item 2&#39;);&#10;&#10;  button.click();&#10;&#10;  expect(rows.count()).toBe(5);&#10;  expect(rows.get(0).getText()).toBe(&#39;Item 4&#39;);&#10;  expect(rows.get(1).getText()).toBe(&#39;Item 3&#39;);&#10;});&#10;&#10;it(&#39;should add odd class to odd entries&#39;, function() {&#10;  var button = element(by.buttonText(&#39;Add item&#39;));&#10;  var rows = element.all(by.repeater(&#39;item in items&#39;));&#10;&#10;  expect(rows.get(0).getAttribute(&#39;class&#39;)).toMatch(/odd/);&#10;  expect(rows.get(1).getAttribute(&#39;class&#39;)).not.toMatch(/odd/);&#10;&#10;  button.click();&#10;&#10;  expect(rows.get(0).getAttribute(&#39;class&#39;)).toMatch(/odd/);&#10;  expect(rows.get(1).getAttribute(&#39;class&#39;)).not.toMatch(/odd/);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-ng-class-odd-animate/index.html" name="example-ng-class-odd-animate"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

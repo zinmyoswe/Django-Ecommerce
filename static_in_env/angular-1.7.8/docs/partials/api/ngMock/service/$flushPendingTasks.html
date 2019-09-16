@@ -1,0 +1,109 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/src/ngMock/angular-mocks.js?message=docs($flushPendingTasks)%3A%20describe%20your%20change...#L243' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.7.8/src/ngMock/angular-mocks.js#L243' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$flushPendingTasks</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  
+
+    <li>
+      - service in module <a href="api/ngMock">ngMock</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <h2 id="overview">Overview</h2>
+  <p>Flushes all currently pending tasks and executes the corresponding callbacks.</p>
+<p>Optionally, you can also pass a <code>delay</code> argument to only flush tasks that are scheduled to be
+executed within <code>delay</code> milliseconds. Currently, <code>delay</code> only applies to timeouts, since all
+other tasks have a delay of 0 (i.e. they are scheduled to be executed as soon as possible, but
+still asynchronously).</p>
+<p>If no delay is specified, it uses a delay such that all currently pending tasks are flushed.</p>
+<p>The types of tasks that are flushed include:</p>
+<ul>
+<li>Pending timeouts (via <a href="api/ngMock/service/$timeout"><code>$timeout</code></a>).</li>
+<li>Pending tasks scheduled via <a href="api/ng/type/$rootScope.Scope#$applyAsync">$applyAsync</a>.</li>
+<li>Pending tasks scheduled via <a href="api/ng/type/$rootScope.Scope#$evalAsync">$evalAsync</a>.
+These include tasks scheduled via <code>$evalAsync()</code> indirectly (such as <a href="api/ng/service/$q"><code>$q</code></a> promises).</li>
+</ul>
+<div class="alert alert-info">
+  Periodic tasks scheduled via <a href="api/ngMock/service/$interval"><code>$interval</code></a> use a different queue and are not flushed by
+  <code>$flushPendingTasks()</code>. Use <a href="api/ngMock/service/$interval#flush">$interval.flush(millis)</a> instead.
+</div>
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  <h2 id="usage">Usage</h2>
+    
+      <p><code>$flushPendingTasks([delay]);</code></p>
+
+
+    
+
+    
+<section class="api-section">
+  <h3 id="$flushPendingTasks-arguments">Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        delay
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-number">number</a>
+      </td>
+      <td>
+        <p>The number of milliseconds to flush.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+    
+
+    
+
+  
+  
+  
+
+
+
+  
+</div>
+
+

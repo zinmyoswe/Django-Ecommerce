@@ -1,0 +1,30 @@
+<a href='https://github.com/angular/angular.js/edit/v1.7.x/docs/content/error/ngRef/nonassign.ngdoc?message=docs(error%2Fnonassign)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: ngRef:nonassign
+  <div><span class='hint'>Non-Assignable Expression</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="Expression in ngRef="{0}" is non-assignable!">Expression in ngRef="{0}" is non-assignable!</pre>
+</div>
+
+<h2 id="description">Description</h2>
+<div class="description">
+  <p>This error occurs when ngRef defines an expression that is not-assignable.</p>
+<p>In order for ngRef to work, it must be possible to write the reference into the path defined with the expression.</p>
+<p>For example, the following expressions are non-assignable:</p>
+<pre><code>&lt;my-directive ng-ref=&quot;{}&quot;&gt;&lt;/my-directive&gt;
+
+&lt;my-directive ng-ref=&quot;myFn()&quot;&gt;&lt;/my-directive&gt;
+
+&lt;!-- missing attribute value is also invalid --&gt;
+&lt;my-directive ng-ref&gt;&lt;/my-directive&gt;
+</code></pre>
+<p>To resolve this error, use a path expression that is assignable:</p>
+<pre><code>&lt;my-directive ng-ref=&quot;$ctrl.reference&quot;&gt;&lt;/my-directive&gt;
+</code></pre>
+
+</div>
+
+
