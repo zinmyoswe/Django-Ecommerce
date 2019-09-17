@@ -1,7 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-	
+<style>
+	/*[ Block2 ]
+///////////////////////////////////////////////////////////
+*/
+.block2-labelpromotion::before,
+.block2-labelsale::before,
+.block2-labelnew::before 
+{
+  z-index: 100;
+  font-family: Montserrat-Regular;
+  font-size: 12px;
+  color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 22px;
+  border-radius: 11px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.block2-labelsale::before {
+  background-color: #e65540;
+  content: 'Sale';
+}
+
+.block2-labelnew::before {
+  background-color: #66a8a6;
+  content: 'New';
+}
+
+.block2-labelpromotion::before{
+	background-color: #000;
+	content: 'Promotion';
+	width: 70px;
+  }
+
+
+</style>
 
 	<!-- Slide1 -->
 	<section class="slide1">
@@ -191,13 +235,15 @@
 
 									<div class="block2-btn-addcart w-size1 trans-0-4">
 										<!-- Button -->
-										
+										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+											Add to Cart
+										</button>
 									</div>
 								</div>
 							</div>
 
 							<div class="block2-txt p-t-20">
-								<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
 									{{ item.title }}
 								</a>
 
@@ -212,7 +258,7 @@
 					<div class="item-slick2 p-l-15 p-r-15">
 						<!-- Block2 -->
 						<div class="block2">
-							<div class="block2-img wrap-pic-w of-hidden pos-relative">
+							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelpromotion">
 								<img src="{% static 'images/item-03.webp' %}" alt="IMG-PRODUCT">
 
 								<div class="block2-overlay trans-0-4">
