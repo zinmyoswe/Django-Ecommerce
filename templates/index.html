@@ -247,9 +247,22 @@
 									{{ item.title }}
 								</a>
 
+								{% if item.discount_price %}
+								<span class="block2-oldprice m-text7 p-r-5">
+									${{ item.price }}
+								</span>
+
+								<span class="block2-newprice m-text8 p-r-5">
+									${{ item.discount_price }}
+								</span>
+								{% else %}
 								<span class="block2-price m-text6 p-r-5">
 									${{ item.price }}
 								</span>
+								{% endif %}
+								
+
+								
 							</div>
 						</div>
 					</div>
@@ -317,6 +330,7 @@
 								<span class="block2-price m-text6 p-r-5">
 									$165.90
 								</span>
+
 							</div>
 						</div>
 					</div>

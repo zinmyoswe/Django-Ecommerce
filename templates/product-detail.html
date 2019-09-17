@@ -15,12 +15,12 @@
 		</a>
 
 		<a href="#" class="s-text16">
-			T-Shirt
+			{{ object.get_category_display }}
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
 		<span class="s-text17">
-			Boxy T-Shirt with Roll Sleeve Detail
+			{{object.title}}
 		</span>
 	</div>
 
@@ -58,9 +58,20 @@
 					{{object.title}}
 				</h4>
 
-				<span class="m-text17">
-					${{object.price}}
-				</span>
+				
+				{% if object.discount_price %}
+								<span class="block2-oldprice m-text7 p-r-5" style="font-size: 1.5rem;">
+									${{ object.price }}
+								</span>
+
+								<span class="block2-newprice m-text8 p-r-5" style="font-size: 1.5rem;">
+									${{ object.discount_price }}
+								</span>
+								{% else %}
+								<span class="m-text17">
+									${{object.price}}
+								</span>
+								{% endif %}
 
 				<p class="s-text8 p-t-10">
 					Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
@@ -73,8 +84,8 @@
 							Size
 						</div>
 
-						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-							<select class="selection-2" name="size">
+						<div class="rs2-select2 rs3-select2 w-size16">
+							<select class="form-control" name="size">
 								<option>Choose an option</option>
 								<option>Size S</option>
 								<option>Size M</option>
@@ -89,8 +100,8 @@
 							Color
 						</div>
 
-						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-							<select class="selection-2" name="color">
+						<div class="rs2-select2 rs3-select2 w-size16">
+							<select class="form-control" name="color">
 								<option>Choose an option</option>
 								<option>Gray</option>
 								<option>Red</option>
