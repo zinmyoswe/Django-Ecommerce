@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.shortcuts import redirect
+from django.utils import timezone
 from .models import Item, OrderItem, Order
 
 # Create your views here.
@@ -40,8 +41,10 @@ def add_to_cart(request, slug):
             order_item.quantity += 1
             order_item.save()
         else:
-            order = Order.objects.create(user=request.user)
             order.items.add(order_item)
-        return redirect("core:product", kwargs={
-            'slug': slug
-        })
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(
+            user=request.user, ordered_date=ordered_date)
+        order.items.add(order_item)
+    return redirect("core:product", slug=slug)
