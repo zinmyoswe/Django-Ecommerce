@@ -32,7 +32,7 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="index.html" class="logo">
+				<a href="/" class="logo">
 					<img src="{% static 'images/icons/logo.png' %}" alt="IMG-LOGO">
 				</a>
 
@@ -41,12 +41,8 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="index.html">Home</a>
-								<ul class="sub_menu">
-									<li><a href="index.html">Homepage V1</a></li>
-									<li><a href="home-02.html">Homepage V2</a></li>
-									<li><a href="home-03.html">Homepage V3</a></li>
-								</ul>
+								<a href="/">Home</a>
+								
 							</li>
 
 							<li>
@@ -69,9 +65,21 @@
 								<a href="about.html">About</a>
 							</li>
 
+							{% if request.user.is_authenticated %}
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="contact.html">Cart</a>
 							</li>
+							<li>
+								<a href="{% url 'account_logout' %}">Logout</a>
+							</li>
+							{% else %}
+							<li>
+								<a href="{% url 'account_login' %}">Login</a>
+							</li>
+							<li>
+								<a href="{% url 'account_signup' %}">SignUp</a>
+							</li>
+							{% endif %}
 						</ul>
 					</nav>
 				</div>

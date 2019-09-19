@@ -1,9 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   {% include "header.html" %}
+
+  <title>{% block head_title %}{% endblock %}</title>
+  {% block extra_head %} {% endblock %}
   <body class="animsition">
     {% include "nav.html"%}
-    <div class="mt-3">
+    <div class="mt-2">
       {% if messages %} {% for message in messages %}
       <div
         class="alert alert-{{ message.tags }} alert-dismissible fade show"
@@ -22,7 +26,16 @@
       </div>
     </div>
 
-    {% endfor %} {% endif %} {% block content %} {% endblock content %} {%
-    include "footer.html"%} {% include "script.html"%}
+    {% endfor %} 
+    {% endif %} 
+
+    {% block content %} 
+    {% endblock content %}
+
+     {% block extra_body %} 
+     {% endblock %} 
+
+    {% include "footer.html"%} 
+    {% include "script.html"%}
   </body>
 </html>
