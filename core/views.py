@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.shortcuts import redirect
@@ -44,13 +45,16 @@ def add_to_cart(request, slug):
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
             order_item.save()
+            messages.info(request, "Item qty was updated.")
         else:
+            messages.info(request, "Item was added to your cart.")
             order.items.add(order_item)
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(
             user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
+        messages.info(request, "Item was added to your cart.")
     return redirect("core:product", slug=slug)
 
 
@@ -69,10 +73,14 @@ def remove_from_cart(request, slug):
                 ordered=False
             )[0]
             order.items.remove(order_item)
+            messages.info(request, "Item was removed from your cart.")
+            return redirect("core:product", slug=slug)
         else:
             # add a message saying the user dosent have an order
+            messages.info(request, "Item was not in your cart.")
             return redirect("core:product", slug=slug)
     else:
         # add a message saying the user dosent have an order
+        messages.info(request, "u don't have an active order.")
         return redirect("core:product", slug=slug)
     return redirect("core:product", slug=slug)
