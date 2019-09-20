@@ -13,6 +13,11 @@ class HomeView(ListView):
     template_name = "index.html"
 
 
+class ShopView(ListView):
+    model = Item
+    template_name = "shop.html"
+
+
 def home(request):
     context = {
         'items': Item.objects.all()
@@ -30,6 +35,13 @@ def products(request):
         'items': Item.objects.all()
     }
     return render(request, "product-detail.html", context)
+
+
+def shop(request):
+    context = {
+        'items': Item.objects.all()
+    }
+    return render(request, "shop.html", context)
 
 
 def add_to_cart(request, slug):
