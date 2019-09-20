@@ -1,4 +1,5 @@
 {% load static %}
+{% load cart_template_tags %}
 <!-- Header -->
 <header class="header1">
 		<!-- Header desktop -->
@@ -67,7 +68,7 @@
 
 							{% if request.user.is_authenticated %}
 							<li>
-								<a href="contact.html">Cart</a>
+								<a href="contact.html">Cart<span class="badge badge-dark">{{ request.user|cart_item_count }}</span></a>
 							</li>
 							<li>
 								<a href="{% url 'account_logout' %}">Logout</a>
