@@ -13,10 +13,20 @@ class HomeView(ListView):
     template_name = "index.html"
 
 
+class OrderSummaryView(DetailView):
+    model = Order
+    template_name = "order_summary.html"
+
+
 class ShopView(ListView):
     model = Item
     paginate_by = 2
     template_name = "shop.html"
+
+
+class ItemDetailView(DetailView):
+    model = Item
+    template_name = "product-detail.html"
 
 
 def home(request):
@@ -24,11 +34,6 @@ def home(request):
         'items': Item.objects.all()
     }
     return render(request, "index.html", context)
-
-
-class ItemDetailView(DetailView):
-    model = Item
-    template_name = "product-detail.html"
 
 
 def products(request):
