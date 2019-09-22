@@ -76,18 +76,18 @@ def add_to_cart(request, slug):
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "Item qty was updated.")
-            return redirect("core:product", slug=slug)
+            return redirect("core:order-summary")
         else:
             order.items.add(order_item)
             messages.info(request, "Item was added to your cart.")
-            return redirect("core:product", slug=slug)
+            return redirect("core:order-summary")
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(
             user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "Item was added to your cart.")
-    return redirect("core:product", slug=slug)
+    return redirect("core:order-summary")
 
 
 @login_required
@@ -107,7 +107,7 @@ def remove_from_cart(request, slug):
             )[0]
             order.items.remove(order_item)
             messages.info(request, "Item was removed from your cart.")
-            return redirect("core:product", slug=slug)
+            return redirect("core:order-summary")
         else:
             # add a message saying the user dosent have an order
             messages.info(request, "Item was not in your cart.")
@@ -134,9 +134,13 @@ def remove_single_item_from_cart(request, slug):
                 user=request.user,
                 ordered=False
             )[0]
-            order.items.remove(order_item)
-            messages.info(request, "Item was removed from your cart.")
-            return redirect("core:product", slug=slug)
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+            else:
+                order.items.remove(order_item)
+            messages.info(request, "This item qty was updated.")
+            return redirect("core:order-summary")
         else:
             # add a message saying the user dosent have an order
             messages.info(request, "Item was not in your cart.")

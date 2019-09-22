@@ -21,9 +21,9 @@
             <td>{{ order_item.item.title }}</td>
             <td>{{ order_item.item.price }}</td>
             <td>
-            	<a href=""><i class="fas fa-minus mr-3"></i></a>
+            	<a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-3"></i></a>
             	{{ order_item.quantity }}
-            	<a href=""><i class="fas fa-plus ml-3"></i></a>
+            	<a href="{% url 'core:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-3"></i></a>
             </td>
             <td>
               {% if order_item.item.discount_price %}
@@ -32,6 +32,9 @@
               {% else %}
                   ${{ order_item.get_total_item_price}}
               {% endif %}
+              <a style="color: red" href="{% url 'core:remove-from-cart' order_item.item.slug %}">
+              	<i class="fas fa-trash float-right"></i>
+              </a>
             </td>
           </tr>
           {% empty %}
