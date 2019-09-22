@@ -17,7 +17,7 @@
         <tbody>
           {% for order_item in object.items.all %}
           <tr>
-            <th scope="row">1</th>
+            <th scope="row">{{ forloop.counter }}</th>
             <td>{{ order_item.item.title }}</td>
             <td>{{ order_item.item.price }}</td>
             <td>{{ order_item.item.quantity }}</td>
@@ -32,6 +32,13 @@
           </tr>
         </tbody>
         {% endfor %}
+        <tr>
+        	<td colspan="4"><b>Order Total : </b></td>
+        	<td><b>${{ object.get_total }}</b></td>
+        </tr>
+        <tr>
+        	<td colspan="5"><a href="" class="btn btn-warning float-right">Checkout</a></td>
+        </tr>
       </table>
     </div>
   </div>
