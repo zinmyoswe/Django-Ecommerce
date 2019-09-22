@@ -40,6 +40,15 @@ class ItemDetailView(DetailView):
     template_name = "product-detail.html"
 
 
+class CheckoutView(ListView):
+    model = Item
+    template_name = "checkout.html"
+
+
+def checkout(request):
+    return render(request, "checkout.html")
+
+
 def home(request):
     context = {
         'items': Item.objects.all()
