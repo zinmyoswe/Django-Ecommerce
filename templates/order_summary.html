@@ -20,7 +20,11 @@
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ order_item.item.title }}</td>
             <td>{{ order_item.item.price }}</td>
-            <td>{{ order_item.item.quantity }}</td>
+            <td>
+            	<a href=""><i class="fas fa-minus mr-3"></i></a>
+            	{{ order_item.quantity }}
+            	<a href=""><i class="fas fa-plus ml-3"></i></a>
+            </td>
             <td>
               {% if order_item.item.discount_price %}
                   ${{ order_item.get_total_discount_item_price}}
@@ -30,15 +34,25 @@
               {% endif %}
             </td>
           </tr>
+          {% empty %}
+          <tr>
+			<td colspan="5">Your cart is empty</td>
+          </tr>
         </tbody>
         {% endfor %}
+        {% if object.get_total %}
         <tr>
         	<td colspan="4"><b>Order Total : </b></td>
         	<td><b>${{ object.get_total }}</b></td>
         </tr>
         <tr>
-        	<td colspan="5"><a href="" class="btn btn-warning float-right">Checkout</a></td>
+        	<td colspan="5">
+        		<a href="" class="btn btn-warning float-right ml-2">Checkout</a>
+        		<a href="/" class="btn btn-primary float-right">Continue Shopping</a>
+
+        	</td>
         </tr>
+        {% endif %}
       </table>
     </div>
   </div>
