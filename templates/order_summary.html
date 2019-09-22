@@ -21,7 +21,13 @@
             <td>{{ order_item.item.title }}</td>
             <td>{{ order_item.item.price }}</td>
             <td>{{ order_item.item.quantity }}</td>
-            <td></td>
+            <td>
+              {% if order_item.item.discount_price %}
+                  ${{ order_item.get_total_discount_item_price}}
+              {% else %}
+                  ${{ order_item.get_total_item_price}}
+              {% endif %}
+            </td>
           </tr>
         </tbody>
         {% endfor %}
