@@ -24,6 +24,7 @@
             <td>
               {% if order_item.item.discount_price %}
                   ${{ order_item.get_total_discount_item_price}}
+                  <span class="badge badge-primary">  Saving ${{ order_item.get_amount_saved }}</span>
               {% else %}
                   ${{ order_item.get_total_item_price}}
               {% endif %}
