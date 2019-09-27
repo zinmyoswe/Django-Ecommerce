@@ -53,8 +53,6 @@ class CheckoutView(View):
         form = CheckoutForm(self.request.POST or None)
         print(self.request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            print("The form is valid")
             return redirect('core:checkout')
         messages.warning(self.request, "Failed Checkout")
         return redirect('core:checkout')
