@@ -54,7 +54,8 @@
     	<h4 class="mb-3" style=" margin-top: 26px;">Crispy form</h4>
     
       <h4 class="mb-3" style=" margin-top: 26px;">Billing address</h4>
-      <form class="needs-validation" novalidate>
+      <form method="POST" class="needs-validation" novalidate>
+      	{% csrf_token %}
         <div class="mb-3">
           <label for="address">Address</label>
           {{ form.street_address }}
@@ -109,7 +110,7 @@
         <div class="d-block my-3">
         	{% for value, name in form.fields.payment_option.choices %}
           <div class="custom-control custom-radio">
-            <input id="{{ name }}" name="paymentMethod" type="radio" class="custom-control-input"  required>
+            <input id="{{ name }}" name="payment_option" type="radio" class="custom-control-input"  required>
             <label class="custom-control-label" for="{{name}}">{{ name }}</label>
           </div>
           {% endfor %}
