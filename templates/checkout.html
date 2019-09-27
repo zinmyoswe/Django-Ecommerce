@@ -49,6 +49,12 @@
 
 
     <div class="col-md-8 order-md-1 card" >
+    	<h4 class="mb-3" style=" margin-top: 26px;">Crispy form</h4>
+    	<form>
+    		{% csrf_token %}
+    		{{ form|crispy }}
+    		<button class="btn btn-primary" type="submit">Checkout</button>
+    	</form>
       <h4 class="mb-3" style=" margin-top: 26px;">Billing address</h4>
       <form class="needs-validation" novalidate>
         
