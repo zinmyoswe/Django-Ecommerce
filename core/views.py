@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -10,11 +11,21 @@ from .forms import CheckoutForm
 from .models import Item, OrderItem, Order, BillingAddress
 
 # Create your views here.
+import stripe
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
         return render(self.request, "payment.html")
+
+    def post(self, *args, **kwargs):
+        stripe.Charge.create(
+            amount=2000,
+            currency="usd",
+            source="tok_amex",  # obtained with Stripe.js
+            description="Charge for jenny.rosen@example.com"
+        )
 
 
 class HomeView(ListView):
