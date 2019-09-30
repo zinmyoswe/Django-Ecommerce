@@ -12,7 +12,7 @@ from .models import Item, OrderItem, Order, BillingAddress
 
 # Create your views here.
 import stripe
-stripe.api_key = settings.STRIPE_SECRET_KEY
+stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 
 
 class PaymentView(View):
