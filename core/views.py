@@ -12,6 +12,11 @@ from .models import Item, OrderItem, Order, BillingAddress
 # Create your views here.
 
 
+class PaymentView(View):
+    def get(self, *args, **kwargs):
+        return render(self.request, "payment.html")
+
+
 class HomeView(ListView):
     model = Item
     template_name = "index.html"
