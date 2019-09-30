@@ -17,15 +17,18 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
+        # order
         return render(self.request, "payment.html")
 
     def post(self, *args, **kwargs):
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        token = self.request.POST.get('stripeToken')
         stripe.Charge.create(
-            amount=2000,
+            amount=order.get_total() * 100,  # cents
             currency="usd",
-            source="tok_amex",  # obtained with Stripe.js
-            description="Charge for jenny.rosen@example.com"
+            source=token
         )
+        order.ordered = True
 
 
 class HomeView(ListView):
