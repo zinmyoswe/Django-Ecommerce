@@ -32,9 +32,9 @@
 					<div class="wrap-slick3-dots"></div>
 
 					<div class="slick3">
-						<div class="item-slick3" data-thumb="{% static 'images/product-detail1.jpg' %}">
+						<div class="item-slick3" data-thumb="{{ item.image.url }}">
 							<div class="wrap-pic-w">
-								<img src="{% static 'images/product-detail1.jpg' %}" alt="IMG-PRODUCT">
+								<img src="{{ item.image.url }}" alt="IMG-PRODUCT">
 							</div>
 						</div>
 
