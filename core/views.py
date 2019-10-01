@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm
-from .models import Item, OrderItem, Order, BillingAddress, Payment
+from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon
 
 # Create your views here.
 import stripe
@@ -276,3 +276,22 @@ def remove_single_item_from_cart(request, slug):
         messages.info(request, "u don't have an active order.")
         return redirect("core:product", slug=slug)
     return redirect("core:product", slug=slug)
+
+
+def get_coupon(request, code):
+    try:
+        coupon = Coupon.objects.get(code=code)
+        return coupon
+    except ObjectDoesNotExist:
+        messages.info(request, "This coupon does not exist")
+        return redirect("core:checkout")
+
+
+def add_coupon(request, code):
+    try:
+        order = Order.objects.get(user=request.user, ordered=False)
+        coupon = get_coupon(request, code)
+
+    except ObjectDoesNotExist:
+        messages.info(request, "You do not have an active order")
+        return redirect("core:checkout")

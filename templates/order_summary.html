@@ -20,6 +20,9 @@
           {% for order_item in object.items.all %}
           <tr>
             <th scope="row">{{ forloop.counter }}</th>
+            <td>
+			<img src="{{ order_item.item.image.url }}" style="width: 130px;"> 
+            </td>
             <td>{{ order_item.item.title }}</td>
             <td>{{ order_item.item.price }}</td>
             <td>
@@ -47,7 +50,7 @@
         {% endfor %}
         {% if object.get_total %}
         <tr>
-        	<td colspan="4"><b>Order Total : </b></td>
+        	<td colspan="5"><b>Order Total : </b></td>
         	<td><b>${{ object.get_total }}</b></td>
         </tr>
         <tr>
