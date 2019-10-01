@@ -8,11 +8,11 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm
-from .models import Item, OrderItem, Order, BillingAddress
+from .models import Item, OrderItem, Order, BillingAddress, Payment
 
 # Create your views here.
 import stripe
-stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class PaymentView(View):
@@ -23,12 +23,24 @@ class PaymentView(View):
     def post(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, ordered=False)
         token = self.request.POST.get('stripeToken')
-        stripe.Charge.create(
-            amount=order.get_total() * 100,  # cents
+        amount = order.get_total() * 100
+        charge = stripe.Charge.create(
+            amount=amount,  # cents
             currency="usd",
             source=token
         )
+
+        # create the payment
+        payment = Payment()
+        payment.stripe_charge_id = charge['id']
+        payment.user = self.request.user
+        payment.amount = amount
+        payment.save()
+
+        # assign the payment to the order
         order.ordered = True
+        order.payment = payment
+        order.save()
 
 
 class HomeView(ListView):
