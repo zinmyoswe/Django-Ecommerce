@@ -109,7 +109,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 class ShopView(ListView):
     model = Item
-    paginate_by = 2
+    paginate_by = 3
     template_name = "shop.html"
 
 

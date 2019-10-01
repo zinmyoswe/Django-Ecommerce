@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+<style type="text/css">
+	.selection-2{
+	display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	}
+</style>
 
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/heading-pages-02.jpg);">
@@ -142,7 +158,8 @@
 					<!--  -->
 					<div class="flex-sb-m flex-w p-b-35">
 						<div class="flex-w">
-							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+						
+							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10" >
 								<select class="selection-2" name="sorting">
 									<option>Default Sorting</option>
 									<option>Popularity</option>
@@ -176,7 +193,8 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<img src="{% static 'images/item-02.webp' %}" alt="IMG-PRODUCT">
+									<img src="{{ item.image.url }}" alt="IMG-PRODUCT" 
+								style="height: 360px;">
 
 									<div class="block2-overlay trans-0-4">
 										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -194,12 +212,12 @@
 								</div>
 
 								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+									<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
 										{{item.title}}
 									</a>
 
 									<span class="block2-price m-text6 p-r-5">
-										$75.00
+										${{item.price}}
 									</span>
 								</div>
 							</div>
