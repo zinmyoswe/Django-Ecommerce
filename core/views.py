@@ -18,7 +18,11 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class PaymentView(View):
     def get(self, *args, **kwargs):
         # order
-        return render(self.request, "payment.html")
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        context = {
+            'order': order
+        }
+        return render(self.request, "payment.html", context)
 
     def post(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, ordered=False)
