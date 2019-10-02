@@ -294,7 +294,7 @@ def get_coupon(request, code):
         return redirect("core:checkout")
 
 
-def add_coupon(request, code):
+def add_coupon(request):
     try:
         order = Order.objects.get(user=request.user, ordered=False)
         coupon = get_coupon(request, code)
