@@ -291,6 +291,9 @@ def add_coupon(request, code):
     try:
         order = Order.objects.get(user=request.user, ordered=False)
         coupon = get_coupon(request, code)
+        order.save()
+        messages.success(request, "Successfully added coupon")
+        return redirect("core:checkout")
 
     except ObjectDoesNotExist:
         messages.info(request, "You do not have an active order")
