@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
-from .forms import CheckoutForm
+from .forms import CheckoutForm, CouponForm
 from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon
 
 # Create your views here.
