@@ -57,9 +57,9 @@
         <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success">
             <h6 class="my-0">Promo code</h6>
-            <small>EXAMPLECODE</small>
+            <small>{{order.coupon.code}}</small>
           </div>
-          <span class="text-success">-$5</span>
+          <span class="text-success">-${{ order.coupon.amount }}</span>
         </li>
         <li class="list-group-item d-flex justify-content-between">
           <span>Total (USD)</span>
