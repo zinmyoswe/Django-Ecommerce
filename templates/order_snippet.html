@@ -67,9 +67,10 @@
         </li>
       </ul>
 
-      <form class="card p-2">
+      <form method="POST" action="{% url 'core:add-coupon' %}" class="card p-2">
+        {% csrf_token %}
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Promo code">
+          {{ couponform.code }}
           <div class="input-group-append">
             <button type="submit" class="btn btn-secondary">Redeem</button>
           </div>
