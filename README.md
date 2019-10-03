@@ -8,6 +8,9 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 
 ![image](https://user-images.githubusercontent.com/29988949/65999313-ff67fe00-e451-11e9-9ed9-fc7bce704f17.png)
 
+`Shop Page`
+![image](https://user-images.githubusercontent.com/29988949/66098968-923f9000-e559-11e9-8691-cd5c2b181ca1.png)
+
 # Installation
 
 `pip install django`
