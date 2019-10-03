@@ -19,10 +19,16 @@ class PaymentView(View):
     def get(self, *args, **kwargs):
         # order
         order = Order.objects.get(user=self.request.user, ordered=False)
-        context = {
-            'order': order
-        }
-        return render(self.request, "payment.html", context)
+        if order.billing_address:
+            context = {
+                'order': order,
+                'DISPLAY_COUPON_FORM': False
+            }
+            return render(self.request, "payment.html", context)
+        else:
+            messages.warning(
+                self.request, "u have not added a billing address")
+            return redirect("core:checkout")
 
     def post(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, ordered=False)
@@ -126,7 +132,8 @@ class CheckoutView(View):
             context = {
                 'form': form,
                 'couponform': CouponForm(),
-                'order': order
+                'order': order,
+                'DISPLAY_COUPON_FORM': True
             }
             return render(self.request, "checkout.html", context)
 
