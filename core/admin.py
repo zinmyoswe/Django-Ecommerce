@@ -28,6 +28,10 @@ class OrderAdmin(admin.ModelAdmin):
                    'received',
                    'refund_requested',
                    'refund_granted']
+    search_fields = [
+        'user__username',
+        'ref_code'
+    ]
 
 
 admin.site.register(Item)

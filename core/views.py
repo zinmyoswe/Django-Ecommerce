@@ -11,8 +11,14 @@ from .forms import CheckoutForm, CouponForm
 from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon
 
 # Create your views here.
+import random
+import string
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+def create_ref_code():
+    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
 
 class PaymentView(View):
@@ -50,6 +56,8 @@ class PaymentView(View):
             # assign the payment to the order
             order.ordered = True
             order.payment = payment
+            # TODO : assign ref code
+            order.ref_code = create_red_code
             order.save()
 
             messages.success(self.request, "Order was successful")
