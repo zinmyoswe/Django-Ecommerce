@@ -86,6 +86,12 @@ class Order(models.Model):
         'Payment', on_delete=models.SET_NULL, blank=True, null=True)
     coupon = models.ForeignKey(
         'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
+    '''
+    1. Item added to cart
+    2. Adding a BillingAddress
+    (Failed Checkout)
+    3. Payment
+    '''
 
     def __str__(self):
         return self.user.username
