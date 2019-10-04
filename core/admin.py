@@ -13,6 +13,13 @@ class OrderAdmin(admin.ModelAdmin):
                     'refund_requested',
                     'refund_granted']
 
+    list_filter = ['user',
+                   'ordered',
+                   'being_delivered',
+                   'received',
+                   'refund_requested',
+                   'refund_granted']
+
 
 admin.site.register(Item)
 admin.site.register(OrderItem)
