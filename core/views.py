@@ -341,9 +341,16 @@ class RequestRefundView(View):
                 order.refund_requested = True
                 order.save()
 
-            # store the refund
-            refund = Refund()
-            refund.order = order
-            refund.reason = message
-            refund.email = email
-            refund.save()
+                # store the refund
+                refund = Refund()
+                refund.order = order
+                refund.reason = message
+                refund.email = email
+                refund.save()
+
+                messages.info(self.request, "Your request was received")
+                return redirect("/")
+
+            except ObjectDoesNotExist:
+                messages.info(self.request, "This order does not exist")
+                return redirect("/")
