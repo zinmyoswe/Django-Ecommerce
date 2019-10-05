@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
-from .forms import CheckoutForm, CouponForm
+from .forms import CheckoutForm, CouponForm, RefundForm
 from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon
 
 # Create your views here.
@@ -326,3 +326,14 @@ class AddCouponView(View):
             except ObjectDoesNotExist:
                 messages.info(request, "You do not have an active order")
                 return redirect("core:checkout")
+
+
+class RequestRefundView(View):
+    def post(self, *args, **kwargs):
+        form = RefundForm(request.POST)
+        if form.is_valid():
+            ref_code = form.cleaned_data('ref_code')
+            message = form.cleaned_data('message')
+            # edit the order
+
+            # store the refund
