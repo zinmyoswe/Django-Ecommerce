@@ -339,8 +339,8 @@ class RequestRefundView(View):
     def post(self, *args, **kwargs):
         form = RefundForm(self.request.POST)
         if form.is_valid():
-            ref_code = form.cleaned_data('ref_code')
-            message = form.cleaned_data('message')
+            ref_code = form.cleaned_data.get('ref_code')
+            message = form.cleaned_data.get('message')
             email = form.cleaned_data.get('email')
             # edit the order
             try:
