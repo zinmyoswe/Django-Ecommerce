@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm
-from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon
+from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund
 
 # Create your views here.
 import random
@@ -330,10 +330,20 @@ class AddCouponView(View):
 
 class RequestRefundView(View):
     def post(self, *args, **kwargs):
-        form = RefundForm(request.POST)
+        form = RefundForm(self.request.POST)
         if form.is_valid():
             ref_code = form.cleaned_data('ref_code')
             message = form.cleaned_data('message')
+            email = form.cleaned_data.get('email')
             # edit the order
+            try:
+                order = Order.objects.get(ref_code=ref_code)
+                order.refund_requested = True
+                order.save()
 
             # store the refund
+            refund = Refund()
+            refund.order = order
+            refund.reason = message
+            refund.email = email
+            refund.save()
