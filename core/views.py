@@ -59,7 +59,7 @@ class PaymentView(View):
             order.ordered = True
             order.payment = payment
             # TODO : assign ref code
-            order.ref_code = create_red_code
+            order.ref_code = create_ref_code()
             order.save()
 
             messages.success(self.request, "Order was successful")
