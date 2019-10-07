@@ -17,6 +17,15 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 `Cart Page`
 ![image](https://user-images.githubusercontent.com/29988949/66291144-f0d87700-e895-11e9-8545-b8f93f799063.png)
 
+`BillingAddress Page`
+![image](https://user-images.githubusercontent.com/29988949/66291542-013d2180-e897-11e9-8ea9-40afcb90cee2.png)
+
+`Stripe Payment Page`
+![image](https://user-images.githubusercontent.com/29988949/66291610-29c51b80-e897-11e9-8b47-20de35d6c1d0.png)
+
+`Order Success Page`
+![image](https://user-images.githubusercontent.com/29988949/66291657-3e091880-e897-11e9-830b-6cf44e72a995.png)
+
 # Installation
 
 `pip install django`

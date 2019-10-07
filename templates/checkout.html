@@ -51,8 +51,7 @@
 
 
     <div class="col-md-8 order-md-1 card" >
-    	<h4 class="mb-3" style=" margin-top: 26px;">Crispy form</h4>
-    
+    	
       <h4 class="mb-3" style=" margin-top: 26px;">Billing address</h4>
       <form method="POST" class="needs-validation" novalidate>
       	{% csrf_token %}
@@ -75,10 +74,12 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <label for="state">State</label>
+            <label for="state">City</label>
             <select class="custom-select d-block w-100" id="state" required>
               <option value="">Choose...</option>
               <option>California</option>
+              <option>Yangon</option>
+
             </select>
             <div class="invalid-feedback">
               Please provide a valid state.
