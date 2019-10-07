@@ -9,6 +9,8 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm
 from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
 
 # Create your views here.
 import random
@@ -312,7 +314,7 @@ def get_coupon(request, code):
 
 class AddCouponView(View):
     def post(self, *args, **kwargs):
-        form = CouponForm(request.POST or None)
+        form = CouponForm(self.request.POST or None)
         if form.is_valid():
             try:
                 code = form.cleaned_data.get('code')
