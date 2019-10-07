@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm
-from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund
+from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund
 
 # Create your views here.
 import random
@@ -164,13 +164,12 @@ class CheckoutView(View):
                 #     'same_shipping_address')
                 # save_info = form.cleaned_data.get('save_info')
                 payment_option = form.cleaned_data.get('payment_option')
-                billing_address = Address(
+                billing_address = BillingAddress(
                     user=self.request.user,
                     street_address=street_address,
                     apartment_address=apartment_address,
                     country=country,
-                    zip=zip,
-                    address_type='B'
+                    zip=zip
                 )
                 billing_address.save()
                 order.billing_address = billing_address
