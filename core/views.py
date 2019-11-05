@@ -171,7 +171,8 @@ class CheckoutView(View):
                     street_address=street_address,
                     apartment_address=apartment_address,
                     country=country,
-                    zip=zip
+                    zip=zip,
+                    address_type='B'
                 )
                 billing_address.save()
                 order.billing_address = billing_address
