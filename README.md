@@ -55,3 +55,7 @@ python manage.py createsuperuser
 Username : admin
 Password : 12345678
 ```
+# Demo
+
+Address : http://djangoecommerce.pythonanywhere.com/
+
