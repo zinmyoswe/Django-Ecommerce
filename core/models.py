@@ -34,6 +34,11 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("core:category", kwargs={
+            'slug': self.slug
+        })
+
 
 class Item(models.Model):
     title = models.CharField(max_length=100)

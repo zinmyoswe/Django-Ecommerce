@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm
-from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund
+from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund, Category
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 
@@ -133,6 +133,11 @@ class ShopView(ListView):
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product-detail.html"
+
+
+class CategoryView(ListView):
+    model = Category
+    template_name = "category.html"
 
 
 class CheckoutView(View):
