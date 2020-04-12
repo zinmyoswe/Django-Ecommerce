@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Item, OrderItem, Order, Payment, Coupon, Refund, BillingAddress, Category
+from .models import Item, OrderItem, Order, Payment, Coupon, Refund, BillingAddress, Category, Slide
 
 
 # Register your models here.
@@ -90,6 +90,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Slide)
 admin.site.register(OrderItem)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Payment)
