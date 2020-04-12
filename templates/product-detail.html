@@ -32,9 +32,9 @@
 					<div class="wrap-slick3-dots"></div>
 
 					<div class="slick3">
-						<div class="item-slick3" data-thumb="{{ item.image.url }}">
+						<div class="item-slick3" data-thumb="{{ object.image.url }}">
 							<div class="wrap-pic-w">
-								<img src="{{ item.image.url }}" alt="IMG-PRODUCT">
+								<img src="{{ object.image.url }}" alt="{{ object.title }}">
 							</div>
 						</div>
 
@@ -74,7 +74,7 @@
 								{% endif %}
 
 				<p class="s-text8 p-t-10">
-					{{object.description}}
+					{{ object.description_short }}
 				</p>
 
 				<!--  -->
@@ -153,7 +153,7 @@
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
 						<p class="s-text8">
-							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+							{{ object.description_long }}
 						</p>
 					</div>
 				</div>

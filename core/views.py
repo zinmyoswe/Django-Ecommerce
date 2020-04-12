@@ -193,25 +193,25 @@ class CheckoutView(View):
             return redirect("core:order-summary")
 
 
-def home(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, "index.html", context)
-
-
-def products(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, "product-detail.html", context)
-
-
-def shop(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, "shop.html", context)
+# def home(request):
+#     context = {
+#         'items': Item.objects.all()
+#     }
+#     return render(request, "index.html", context)
+#
+#
+# def products(request):
+#     context = {
+#         'items': Item.objects.all()
+#     }
+#     return render(request, "product-detail.html", context)
+#
+#
+# def shop(request):
+#     context = {
+#         'items': Item.objects.all()
+#     }
+#     return render(request, "shop.html", context)
 
 
 @login_required
