@@ -106,8 +106,9 @@ class PaymentView(View):
 
 
 class HomeView(ListView):
-    model = Item
     template_name = "index.html"
+    queryset = Item.objects.filter(is_active=True)
+    context_object_name = 'items'
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
