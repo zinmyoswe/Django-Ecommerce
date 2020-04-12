@@ -57,5 +57,9 @@ Password : 12345678
 ```
 # Demo
 
-Address : http://djangoecommerce.pythonanywhere.com/
+http://djangoecommerce.pythonanywhere.com
+
+# HTML Template
+
+https://colorlib.com/etc/fashe/index.html
 

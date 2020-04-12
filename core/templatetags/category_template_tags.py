@@ -14,6 +14,14 @@ def categories():
         items_li += """<li><a href="/category/{}">{}</a></li>""".format(i.slug, i.title)
     return mark_safe(items_li)
 
+@register.simple_tag
+def categories_mobile():
+    items = Category.objects.filter(is_active=True).order_by('title')
+    items_li = ""
+    for i in items:
+        items_li += """<li class="item-menu-mobile"><a href="/category/{}">{}</a></li>""".format(i.slug, i.title)
+    return mark_safe(items_li)
+
 
 @register.simple_tag
 def categories_li_a():
