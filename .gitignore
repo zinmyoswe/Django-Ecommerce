@@ -11,3 +11,4 @@ media
 !.travis.yml
 /.env
 /.vscode
+/.idea
