@@ -1,5 +1,6 @@
 {% load static %}
 {% load cart_template_tags %}
+{% load category_template_tags %}
 <!-- Header -->
 <header class="header1">
 		<!-- Header desktop -->
@@ -43,28 +44,14 @@
 						<ul class="main_menu">
 							<li>
 								<a href="/">Home</a>
-								
+
 							</li>
 
 							<li>
 								<a href="shop/">Shop</a>
 							</li>
 
-							<li class="sale-noti">
-								<a href="product.html">Sale</a>
-							</li>
-
-							<li>
-								<a href="cart.html">Features</a>
-							</li>
-
-							<li>
-								<a href="blog.html">Blog</a>
-							</li>
-
-							<li>
-								<a href="about.html">About</a>
-							</li>
+							{% categories %}
 
 							{% if request.user.is_authenticated %}
 							<li>
