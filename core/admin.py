@@ -75,6 +75,7 @@ class ItemAdmin(admin.ModelAdmin):
     ]
     list_filter = ['title', 'category']
     search_fields = ['title', 'category']
+    prepopulated_fields = {"slug": ("title",)}
     actions = [copy_items]
 
 class CategoryAdmin(admin.ModelAdmin):
