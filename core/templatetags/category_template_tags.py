@@ -11,5 +11,5 @@ def categories():
     items = Category.objects.filter(is_active=True).order_by('title')
     items_li = ""
     for i in items:
-        items_li += """<li><a href="{}">{}</a></li>""".format(i.slug, i.title)
+        items_li += """<li><a href="/{}">{}</a></li>""".format(i.slug, i.title)
     return mark_safe(items_li)
