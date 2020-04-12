@@ -42,6 +42,7 @@ class Item(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
+    stock_no = models.CharField(max_length=10)
     description_short = models.CharField(max_length=50)
     description_long = models.TextField()
     image = models.ImageField()
