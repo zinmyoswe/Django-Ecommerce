@@ -311,6 +311,24 @@
 
 					{% categories_mobile %}
 
+					{% if request.user.is_authenticated %}
+					<li class="item-menu-mobile">
+						<a href="{% url 'core:order-summary' %}">Cart<span class="badge badge-dark">{{ request.user|cart_item_count }}</span></a>
+					</li>
+					<li class="item-menu-mobile">
+						<a href="{% url 'account_logout' %}">Logout</a>
+					</li>
+					{% else %}
+					<li class="item-menu-mobile">
+						<a href="#">Login</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'account_login' %}">Login</a></li>
+							<li><a href="{% url 'account_signup' %}">SignUp</a></li>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+					</li>
+					{% endif %}
+
 				</ul>
 			</nav>
 		</div>

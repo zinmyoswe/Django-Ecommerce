@@ -141,10 +141,13 @@ class ItemDetailView(DetailView):
 
 class CategoryView(View):
     def get(self, *args, **kwargs):
-        item = Item.objects.filter(category__slug=self.kwargs['slug'], is_active=True)
-        print(item)
+        category = Category.objects.get(slug=self.kwargs['slug'])
+        item = Item.objects.filter(category=category, is_active=True)
         context = {
-            'object_list': item
+            'object_list': item,
+            'category_title': category,
+            'category_description': category.description,
+            'category_image': category.image
         }
         return render(self.request, "category.html", context)
 
