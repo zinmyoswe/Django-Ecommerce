@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm
-from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund
+from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund, Category
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 
@@ -106,8 +106,9 @@ class PaymentView(View):
 
 
 class HomeView(ListView):
-    model = Item
     template_name = "index.html"
+    queryset = Item.objects.filter(is_active=True)
+    context_object_name = 'items'
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -132,6 +133,23 @@ class ShopView(ListView):
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product-detail.html"
+
+
+# class CategoryView(DetailView):
+#     model = Category
+#     template_name = "category.html"
+
+class CategoryView(View):
+    def get(self, *args, **kwargs):
+        category = Category.objects.get(slug=self.kwargs['slug'])
+        item = Item.objects.filter(category=category, is_active=True)
+        context = {
+            'object_list': item,
+            'category_title': category,
+            'category_description': category.description,
+            'category_image': category.image
+        }
+        return render(self.request, "category.html", context)
 
 
 class CheckoutView(View):
@@ -192,25 +210,25 @@ class CheckoutView(View):
             return redirect("core:order-summary")
 
 
-def home(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, "index.html", context)
-
-
-def products(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, "product-detail.html", context)
-
-
-def shop(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, "shop.html", context)
+# def home(request):
+#     context = {
+#         'items': Item.objects.all()
+#     }
+#     return render(request, "index.html", context)
+#
+#
+# def products(request):
+#     context = {
+#         'items': Item.objects.all()
+#     }
+#     return render(request, "product-detail.html", context)
+#
+#
+# def shop(request):
+#     context = {
+#         'items': Item.objects.all()
+#     }
+#     return render(request, "shop.html", context)
 
 
 @login_required

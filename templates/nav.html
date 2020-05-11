@@ -1,5 +1,6 @@
 {% load static %}
 {% load cart_template_tags %}
+{% load category_template_tags %}
 <!-- Header -->
 <header class="header1">
 		<!-- Header desktop -->
@@ -43,28 +44,14 @@
 						<ul class="main_menu">
 							<li>
 								<a href="/">Home</a>
-								
+
 							</li>
 
 							<li>
-								<a href="shop/">Shop</a>
+								<a href="/shop/">Shop</a>
 							</li>
 
-							<li class="sale-noti">
-								<a href="product.html">Sale</a>
-							</li>
-
-							<li>
-								<a href="cart.html">Features</a>
-							</li>
-
-							<li>
-								<a href="blog.html">Blog</a>
-							</li>
-
-							<li>
-								<a href="about.html">About</a>
-							</li>
+							{% categories %}
 
 							{% if request.user.is_authenticated %}
 							<li>
@@ -75,10 +62,11 @@
 							</li>
 							{% else %}
 							<li>
-								<a href="{% url 'account_login' %}">Login</a>
-							</li>
-							<li>
-								<a href="{% url 'account_signup' %}">SignUp</a>
+								<a href="#">Login</a>
+								<ul class="sub_menu">
+									<li><a href="{% url 'account_login' %}">Login</a></li>
+									<li><a href="{% url 'account_signup' %}">SignUp</a></li>
+								</ul>
 							</li>
 							{% endif %}
 						</ul>
@@ -314,38 +302,33 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
+						<a href="/">Home</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="/shop">Shop</a>
+					</li>
+
+					{% categories_mobile %}
+
+					{% if request.user.is_authenticated %}
+					<li class="item-menu-mobile">
+						<a href="{% url 'core:order-summary' %}">Cart<span class="badge badge-dark">{{ request.user|cart_item_count }}</span></a>
+					</li>
+					<li class="item-menu-mobile">
+						<a href="{% url 'account_logout' %}">Logout</a>
+					</li>
+					{% else %}
+					<li class="item-menu-mobile">
+						<a href="#">Login</a>
 						<ul class="sub-menu">
-							<li><a href="index.html">Homepage V1</a></li>
-							<li><a href="home-02.html">Homepage V2</a></li>
-							<li><a href="home-03.html">Homepage V3</a></li>
+							<li><a href="{% url 'account_login' %}">Login</a></li>
+							<li><a href="{% url 'account_signup' %}">SignUp</a></li>
 						</ul>
 						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 					</li>
+					{% endif %}
 
-					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="cart.html">Features</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.html">Blog</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="about.html">About</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

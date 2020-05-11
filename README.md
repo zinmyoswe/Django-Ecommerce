@@ -55,3 +55,11 @@ python manage.py createsuperuser
 Username : admin
 Password : 12345678
 ```
+# Demo
+
+http://djangoecommerce.pythonanywhere.com
+
+# HTML Template
+
+https://colorlib.com/etc/fashe/index.html
+

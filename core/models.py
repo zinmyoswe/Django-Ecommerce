@@ -24,15 +24,44 @@ ADDRESS_CHOICES = (
 )
 
 
+class Slide(models.Model):
+    caption1 = models.CharField(max_length=100)
+    caption2 = models.CharField(max_length=100)
+    link = models.CharField(max_length=100)
+    image = models.ImageField(help_text="Size: 1920x570")
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return "{} - {}".format(self.caption1, self.caption2)
+
+class Category(models.Model):
+    title = models.CharField(max_length=100)
+    slug = models.SlugField()
+    description = models.TextField()
+    image = models.ImageField()
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("core:category", kwargs={
+            'slug': self.slug
+        })
+
+
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
-    description = models.TextField()
+    stock_no = models.CharField(max_length=10)
+    description_short = models.CharField(max_length=50)
+    description_long = models.TextField()
     image = models.ImageField()
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
