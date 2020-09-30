@@ -51,9 +51,13 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 # Running Django-Ecommerce
 
 `Clone the repository using :`
+
 `git clone https://github.com/zinmyoswe/Django-Ecommerce.git`
+
 `cd Django-Ecommerce`
+
 `Now create virtual environment and actvate it`
+
 
 # For Admin Login
 
