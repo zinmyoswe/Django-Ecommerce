@@ -48,6 +48,13 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 
 `python manage.py runserver`
 
+# Running Django-Ecommerce
+
+Clone the repository using :
+git clone https://github.com/zinmyoswe/Django-Ecommerce.git
+cd Django-Ecommerce
+Now create virtual environment and actvate it
+
 # For Admin Login
 
 ```python
@@ -55,6 +62,7 @@ python manage.py createsuperuser
 Username : admin
 Password : 12345678
 ```
+
 # Demo
 
 http://djangoecommerce.pythonanywhere.com
@@ -62,4 +70,7 @@ http://djangoecommerce.pythonanywhere.com
 # HTML Template
 
 https://colorlib.com/etc/fashe/index.html
+
+# Step By Step Guide to create an Ecommerce Website :
+https://youtu.be/KDgvYTopzY0
 
