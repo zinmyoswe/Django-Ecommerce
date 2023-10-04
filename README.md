@@ -1,4 +1,4 @@
-# Ecommerce website with Django4.2 & Python 3 & AWS
+# Ecommerce with Django4.2 & Python 3 & AWS
 
 Ecommerce website built with Django 4.2.X, Python 3.10, and AWS
 
