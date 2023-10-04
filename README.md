@@ -1,6 +1,6 @@
 # Ecommerce with Django4.2 & Python 3 & AWS
 
-Ecommerce website built with Django 4.2.X, Python 3.10, and AWS
+# Demo of the Ecommerce website
 
 ![image](https://user-images.githubusercontent.com/29988949/65267147-499fc580-dac9-11e9-90e8-eccbc93c7c3a.png)
 
@@ -31,15 +31,21 @@ Ecommerce website built with Django 4.2.X, Python 3.10, and AWS
 
 # Activate the virtual environment
 For Mac/ Linux
+
 `source env/bin/activate`
+
 For Window
+
 `env\scripts\activate`
 
 # install required packages of the project
+
 `pip install django`
+
 `pip install -r requirements.txt`
 
 # start the project database and run the server
+
 `python manage.py makemigrations`
 
 `python manage.py migrate`
@@ -53,9 +59,6 @@ python manage.py createsuperuser
 Username : admin
 Password : 12345678
 ```
-# Demo
-
-http://djangoecommerce.pythonanywhere.com
 
 # HTML Template
 
