@@ -1,4 +1,4 @@
-# Ecommerce with Django4.2 & Python 3 & AWS
+# Ecommerce with Django 4.2 & Python 3.10 & AWS
 
 ## 1. Demo of the Ecommerce website
 
@@ -26,12 +26,12 @@
 `Order Success Page`
 ![image](https://user-images.githubusercontent.com/29988949/66291657-3e091880-e897-11e9-830b-6cf44e72a995.png)
 
-## 2.instruction
+## 2.Instruction
 
-### Installation of Django and Virtual environtment
+### 2.1 Installation of Django and Virtual environtment
 `virtualenv env`
 
-### Activate the virtual environment
+### 2.2 Activate the virtual environment
 For Mac/ Linux
 
 `source env/bin/activate`
@@ -40,13 +40,13 @@ For Window
 
 `env\scripts\activate`
 
-### install required packages of the project
+### 2.3 install required packages of the project
 
 `pip install django`
 
 `pip install -r requirements.txt`
 
-### start the project database and run the server
+### 2.4 start the project database and run the server
 
 `python manage.py makemigrations`
 
@@ -54,7 +54,7 @@ For Window
 
 `python manage.py runserver`
 
-### For Admin Login
+### 2.5 For Admin Login
 
 ```python
 python manage.py createsuperuser
@@ -62,7 +62,7 @@ Username : admin
 Password : 12345678
 ```
 
-# HTML Template
+## 3.0 HTML Template
 
 https://colorlib.com/etc/fashe/index.html
 
