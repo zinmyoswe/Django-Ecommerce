@@ -48,8 +48,9 @@ The repository is a start point for most of my professional projects; for this, 
 ## Installation
 
 ```
-`pip install django`
-`virtualenv env`
+$ pip install django`
+$ virtualenv env`
+
 ```
 ### For Mac/ Linux
 ```
