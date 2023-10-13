@@ -13,17 +13,13 @@
 
 
 <hr class="dotted">
-It is an E-commerce system built in Django. It contains all the essentials for adding products and use PayPal and Stripe as payment systems.
+
+Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS(still working on it)
 
 ## About this Project:
 
-It is an E-commerce system built in Django. It contains all the essentials for adding products and use PayPal and Stripe as payment systems.
-
 The repository is a start point for most of my professional projects; for this, I'm using as a part of my portfolio, feel free to use wherever you want. I'll be happy if you provide any feedback or code improvements or suggestions.
 
-# Django-Ecommerce
-
-Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS(still working on it)
 
 ![image](https://user-images.githubusercontent.com/29988949/65267147-499fc580-dac9-11e9-90e8-eccbc93c7c3a.png)
 
@@ -49,17 +45,17 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS(still working o
 `Order Success Page`
 ![image](https://user-images.githubusercontent.com/29988949/66291657-3e091880-e897-11e9-830b-6cf44e72a995.png)
 
-# Installation
+## Installation
 
 `pip install django`
 
 `virtualenv env`
 
-# For Mac/ Linux
+### For Mac/ Linux
 
 `source env/bin/activate`
 
-# For Window
+### For Window
 
 `env\scripts\activate`
 
@@ -71,7 +67,7 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS(still working o
 
 `python manage.py runserver`
 
-# For Admin Login
+## For Admin Login
 
 ```python
 python manage.py createsuperuser
