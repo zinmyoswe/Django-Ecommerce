@@ -20,7 +20,8 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS(still working o
 
 The repository is a start point for most of my professional projects; for this, I'm using as a part of my portfolio, feel free to use wherever you want. I'll be happy if you provide any feedback or code improvements or suggestions.
 
-<a href="url"><img src="https://user-images.githubusercontent.com/29988949/65267147-499fc580-dac9-11e9-90e8-eccbc93c7c3a.png" align="left" height="50%" width="50%" ></a>
+<img src="https://user-images.githubusercontent.com/29988949/65267147-499fc580-dac9-11e9-90e8-eccbc93c7c3a.png" align="left" height="50%" width="50%" > <img src="https://user-images.githubusercontent.com/29988949/65267147-499fc580-dac9-11e9-90e8-eccbc93c7c3a.png" align="left" height="50%" width="50%" >
+
 
 `Product Slide` <img src="https://user-images.githubusercontent.com/29988949/65267147-499fc580-dac9-11e9-90e8-eccbc93c7c3a.png" width = "60%">
 
