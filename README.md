@@ -47,16 +47,16 @@ The repository is a start point for most of my professional projects; for this, 
 
 ## Installation
 
+```
 `pip install django`
-
 `virtualenv env`
-
+```
 ### For Mac/ Linux
-
+```
 `source env/bin/activate`
-
+```
 ### For Window
-
+```
 `env\scripts\activate`
 
 `pip install -r requirements.txt`
@@ -66,17 +66,23 @@ The repository is a start point for most of my professional projects; for this, 
 `python manage.py migrate`
 
 `python manage.py runserver`
-
+```
 ## For Admin Login
 
-```python
+```
 python manage.py createsuperuser
 Username : admin
 Password : 12345678
 ```
-# Demo
+## Potential Error and solutions
+### 
+django python tried to input http instead of https, but still have the following error: [13/Oct/2023 18:45:36] code 400, message Bad request version ('u|q&L¹°zUÀ\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+[13/Oct/2023 18:45:36] You're accessing the development server over HTTPS, but it only supports HTTP.
 
-http://djangoecommerce.pythonanywhere.com
+This error indicates that there's an attempt to access the Django development server over HTTPS, but it only supports HTTP. This might be due to a few reasons:
+1. **Clear browser cache**: Clear the cache of your browser and try again. Sometimes, the browser remembers that it should access a certain URL via HTTPS and tries to do so every time.
+
+
 
 # HTML Template
 
