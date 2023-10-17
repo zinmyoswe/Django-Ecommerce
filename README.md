@@ -182,12 +182,24 @@ $ python manage.py runserver
 
 ```
 
-## Contributing
+## Other related topics and solutions
+### stripe integration
+When testing your e-commerce website, you certainly wouldn't want to make actual payments for each transaction. Thankfully, Stripe provides a testing environment with a set of test API keys that you can use. Here's a general process on how to test Stripe payment functionality:
+```
 
-You can send how many PR's do you want, I'll be glad to analyse and accept them! And if you have any question about the project...
+1. **Get your test API keys**: Go to the Stripe Dashboard and switch the view from "Live" to "Test". You will find publishable and secret API keys for testing. Use these keys in your test environment.
 
+2. **Use test card numbers**: Stripe provides a variety of [test card numbers](https://stripe.com/docs/testing#cards) that you can use to simulate different types of behavior. For example, the card number `4242 4242 4242 4242` simulates a successful payment, while other numbers can simulate different types of failures.
 
-Thank you!
+3. **Simulate different scenarios**: In addition to successful payments and payment failures, you can also simulate other scenarios, like refunds, disputes, and subscription changes. Check the [Stripe testing documentation](https://stripe.com/docs/testing) for more details.
+
+4. **Use Stripe's webhook testing**: If your application uses webhooks, you can use Stripe's webhook testing feature to send sample events to your server.
+
+5. **Inspect and monitor**: Use the Stripe Dashboard to view and monitor your test transactions. You can check the details of each transaction, including the associated requests and responses.
+
+Remember to make sure that you only use your test API keys and test card numbers in your test environment, and never in your live environment. Also, make sure to thoroughly test all aspects of your payment functionality, including edge cases and failure scenarios, to ensure that your application handles all possible situations correctly.
+```
+
 
 ## License
 
