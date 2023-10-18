@@ -14,7 +14,10 @@
 
 <hr class="dotted">
 
-Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS(still working on it)
+Ecommerce website built with Django 2.2.3, Python 3.7.3. 
+Other features include:
+- integrated with Stripe payment
+- depolyed on AWS (still working on it)
 
 ## About this Project:
 
@@ -185,7 +188,7 @@ $ python manage.py runserver
 ## Other related topics and solutions
 ### stripe integration
 When testing your e-commerce website, you certainly wouldn't want to make actual payments for each transaction. Thankfully, Stripe provides a testing environment with a set of test API keys that you can use. Here's a general process on how to test Stripe payment functionality:
-```
+
 
 1. **Get your test API keys**: Go to the Stripe Dashboard and switch the view from "Live" to "Test". You will find publishable and secret API keys for testing. Use these keys in your test environment.
 
@@ -198,8 +201,9 @@ When testing your e-commerce website, you certainly wouldn't want to make actual
 5. **Inspect and monitor**: Use the Stripe Dashboard to view and monitor your test transactions. You can check the details of each transaction, including the associated requests and responses.
 
 Remember to make sure that you only use your test API keys and test card numbers in your test environment, and never in your live environment. Also, make sure to thoroughly test all aspects of your payment functionality, including edge cases and failure scenarios, to ensure that your application handles all possible situations correctly.
-```
 
+### Chrome and other browser show error and changing your http to https
+Clear Browsing Data: Sometimes, Chrome stores settings or cookies that force redirection to HTTPS. Clearing them might solve the issue.
 
 ## License
 
