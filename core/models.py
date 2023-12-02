@@ -25,6 +25,7 @@ ADDRESS_CHOICES = (
 
 
 class Slide(models.Model):
+    id = models.AutoField(primary_key=True)
     caption1 = models.CharField(max_length=100)
     caption2 = models.CharField(max_length=100)
     link = models.CharField(max_length=100)
@@ -35,6 +36,7 @@ class Slide(models.Model):
         return "{} - {}".format(self.caption1, self.caption2)
 
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     slug = models.SlugField()
     description = models.TextField()
@@ -51,6 +53,7 @@ class Category(models.Model):
 
 
 class Item(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
@@ -83,6 +86,7 @@ class Item(models.Model):
 
 
 class OrderItem(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
@@ -108,6 +112,7 @@ class OrderItem(models.Model):
 
 
 class Order(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     ref_code = models.CharField(max_length=20)
@@ -151,6 +156,7 @@ class Order(models.Model):
 
 
 class BillingAddress(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
@@ -168,6 +174,7 @@ class BillingAddress(models.Model):
 
 
 class Payment(models.Model):
+    id = models.AutoField(primary_key=True)
     stripe_charge_id = models.CharField(max_length=50)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL, blank=True, null=True)
@@ -179,6 +186,7 @@ class Payment(models.Model):
 
 
 class Coupon(models.Model):
+    id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=15)
     amount = models.FloatField()
 
@@ -187,6 +195,7 @@ class Coupon(models.Model):
 
 
 class Refund(models.Model):
+    id = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     reason = models.TextField()
     accepted = models.BooleanField(default=False)

@@ -21,7 +21,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'crispy_forms',
     'django_countries',
-    'core'
+    'core',
+    'crispy_bootstrap4'
 ]
 
 MIDDLEWARE = [
