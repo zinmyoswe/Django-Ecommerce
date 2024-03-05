@@ -46,7 +46,7 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 
 `pip install -r requirements.txt`
 
-Install below version and 'New Version will face version conflict error'
+Install below version in terminal and 'New Version will face version conflict error'
 
 ```python
 
