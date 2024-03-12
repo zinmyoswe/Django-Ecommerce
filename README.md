@@ -27,6 +27,7 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 ![image](https://user-images.githubusercontent.com/29988949/66291657-3e091880-e897-11e9-830b-6cf44e72a995.png)
 
 # Installation
+* [install postgresql for your OS](https://www.postgresql.org/download/)
 
 `git clone https://github.com/zinmyoswe/Django-Ecommerce.git`
 
@@ -40,7 +41,9 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 
 `source env/bin/activate`
 
-# For Window
+`brew install postgresql`
+
+# For Windows
 
 `env\Scripts\activate`
 
