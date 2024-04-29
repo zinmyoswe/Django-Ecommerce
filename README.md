@@ -27,7 +27,9 @@ Ecommerce website built with Django 2.2.3, Python 3.7.3, and AWS
 ![image](https://user-images.githubusercontent.com/29988949/66291657-3e091880-e897-11e9-830b-6cf44e72a995.png)
 
 # Installation Video on Youtube
-https://www.youtube.com/watch?v=C8Nj1EyZlBI
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/C8Nj1EyZlBI/0.jpg)](https://www.youtube.com/watch?v=C8Nj1EyZlBI)
+
 
 # Installation
 
