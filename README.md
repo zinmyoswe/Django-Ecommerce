@@ -83,7 +83,4 @@ http://djangoecommerce.pythonanywhere.com
 
 https://colorlib.com/etc/fashe/index.html
 
-# Installation Video
-
-[![Django Ecommerce](https://img.youtube.com/vi/C8Nj1EyZlBI/0.jpg)](https://www.youtube.com/watch?v=C8Nj1EyZlBI)
 
